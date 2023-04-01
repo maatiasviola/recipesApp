@@ -4,9 +4,10 @@ import dummyData from '../../constants/dummyData'
 import ProfileValue from "./ProfileValue"
 import LineDivider from '../LineDivider'
 
-const {trendingRecipes}=dummyData
-const dummy_profile=trendingRecipes[0].author
+//Obtengo usuario hardcodeado
+const dummy_profile=dummyData.trendingRecipes[0].author
 
+//Seccion configuracion con Nombre, Email y Password
 export const ProfileSection1 = ()=>{
   return(
     <View style={styles.profileSectionContainer}>
@@ -37,6 +38,7 @@ export const ProfileSection1 = ()=>{
   )
 }
 
+//Seccion configuracion con Cerrar Sesion
 export const ProfileSection2 = ()=>{
   return(
     <View style={styles.profileSectionContainer}>

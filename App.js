@@ -4,12 +4,12 @@ import Tabs from './src/navigation/Tabs';
 import {useFonts} from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { Text } from 'react-native';
-import Recipe from './src/screens/Recipe';
 import { Easing } from 'react-native';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import RecipesListing from './src/screens/RecipesListing';
 import Login from './src/screens/Login';
 import RecipeDetails from './src/screens/RecipeDetails';
+import AuthMain from './src/screens/Authentication/AuthMain';
 
 const Stack=createSharedElementStackNavigator()
 const options={
@@ -70,12 +70,12 @@ export default function App() {
           component={Login}
         />
         <Stack.Screen
-            name="Home"
-            component={Tabs}
+          name="Authorization"
+          component={AuthMain}
         />
         <Stack.Screen
-            name="Recipe"
-            component={Recipe}
+            name="Home"
+            component={Tabs}
         />
         <Stack.Screen 
           name="RecipeListing"

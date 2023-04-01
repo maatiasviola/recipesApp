@@ -1,5 +1,7 @@
 import { ImageBackground, Text, TouchableOpacity } from "react-native"
-import { COLORS, FONTS, SIZES } from "../constants"
+import { COLORS, FONTS, SIZES } from "../../constants"
+
+//Card utilizada para cada categoria screen "Search"
 
 const CategoryCard = ({category,containerStyle,onPress})=>{
   return(

@@ -1,5 +1,5 @@
 import { View,Text,Image,StyleSheet,TouchableOpacity } from "react-native"
-import { COLORS, FONTS, SIZES } from "../constants"
+import { COLORS, FONTS, SIZES } from "../../constants"
 
 const CategorieCard=({categoryItem,containerStyle,onPress})=>{
   return(

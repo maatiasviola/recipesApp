@@ -1,14 +1,17 @@
 import { FlatList,View,Text,TouchableOpacity, SafeAreaView,StyleSheet } from "react-native"
 import { dummyData, SIZES,FONTS, COLORS } from "../constants"
-import CategorieCard from "../components/CategorieCard"
-import MyRecipesTab from "../components/MyRecipesTab"
+import CategorieCard from "../components/Home/CategorieCard"
+import MyRecipesTab from "../components/Home/MyRecipesTab"
 import SearchInput from "../components/SearchInput"
-import TrendingRecipesList from "../components/TrendingRecipes"
-import WelcomeTab from "../components/WelcomeTab"
+import TrendingRecipesList from "../components/Home/TrendingRecipesList"
+import WelcomeTab from "../components/Home/WelcomeTab"
+
+//Pagina Home
 
 const Home = ({navigation})=>{
   return(
     <SafeAreaView style={styles.container}>
+
     <FlatList
       data={dummyData.categories}
       keyExtractor={categorie=>categorie.id}
@@ -22,19 +25,19 @@ const Home = ({navigation})=>{
           <TrendingRecipesList/>
           
           <View
-            style={{
-              flexDirection:'row',
-              alignItems:'center',
-              marginTop:20,
-              marginHorizontal:SIZES.padding
-            }}
+            style={styles.categoriesContainer}
           >
             <Text style={{...FONTS.h2, flex:1}}>
               Categories
             </Text>
 
-            <TouchableOpacity>
-              <Text style={{color:COLORS.gray,...FONTS.body4}}>
+            <TouchableOpacity onPress={()=>navigation.navigate("Search")}>
+              <Text 
+                style={{
+                  color:COLORS.gray,
+                  ...FONTS.body4
+                }}
+              >
                 View all
               </Text>
             </TouchableOpacity>
@@ -47,7 +50,7 @@ const Home = ({navigation})=>{
           containerStyle={{
             marginHorizontal:SIZES.padding
           }}
-          onPress={()=>navigation?.navigate("Recipe",{recipe:categorie})}
+          onPress={()=>navigation?.navigate("RecipeDetails",{recipe:categorie})}
         />
       }
       ListFooterComponent={
@@ -64,7 +67,13 @@ const styles=StyleSheet.create({
   container:{
     flex:1,
     backgroundColor:COLORS.white
-  }
+  },
+  categoriesContainer:{
+    flexDirection:'row',
+    alignItems:'center',
+    marginTop:20,
+    marginHorizontal:SIZES.padding
+  },
 })
 
 export default Home

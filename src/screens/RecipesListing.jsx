@@ -1,11 +1,12 @@
-import { BackHandler, FlatList, Image, StyleSheet, Text, View, Animated, TouchableOpacity } from "react-native"
-import HorizontalRecipeCard from "../components/HorizontalRecipeCard"
+import { FlatList, Image, StyleSheet, Text, View, TouchableOpacity } from "react-native"
+import HorizontalRecipeCard from "../components/RecipesListing/HorizontalRecipeCard"
 import IconButton from "../components/IconButton"
 import LineDivider from "../components/LineDivider"
 import { COLORS, dummyData, FONTS, icons, SIZES } from "../constants"
 
-const RecipesListing = ({navigation,route})=>{
+//Pagina resultados de busqueda
 
+const RecipesListing = ({navigation,route})=>{
   const {category} = route.params
 
   return(

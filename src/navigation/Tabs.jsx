@@ -4,6 +4,7 @@ import {COLORS,icons} from '../constants'
 import TabIcon from '../components/TabIcon';
 import Settings from "../screens/Settings";
 import Search from "../screens/Search";
+import RecipesListing from "../screens/RecipesListing";
 
 const {Screen,Navigator} = createBottomTabNavigator()
 

@@ -1,4 +1,5 @@
 const loginBackground = require("../assets/images/system/login-background.png")
+const logo=require('../assets/images/logo.webp')
 
 const recipe = require("../assets/images/recipes/recipe.png")
 const spagetti = require("../assets/images/recipes/spagetti.png")
@@ -26,6 +27,7 @@ const UserProfile10 = require("../assets/images/dummy_profiles/profile-pic-10.pn
 
 export default {
     loginBackground,
+    logo,
     recipe,
     spagetti,
     satay,

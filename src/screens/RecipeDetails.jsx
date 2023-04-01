@@ -1,9 +1,15 @@
+import { useNavigation } from "@react-navigation/native"
 import { useRef,useState,useEffect,createRef, useCallback } from "react"
-import { Text, View,Animated,FlatList,TouchableOpacity } from "react-native"
+import { Text, View,Animated,TouchableOpacity, Keyboard, ImageBackground, Image } from "react-native"
+import IconButton from "../components/IconButton"
 import LineDivider from "../components/LineDivider"
-import { COLORS, dummyData, SIZES,FONTS } from "../constants"
+import { COLORS, dummyData, SIZES,FONTS, icons } from "../constants"
+import RecipeDiscussions from "./RecipeTabs/RecipeDiscussions"
+import RecipeIngredients from "./RecipeTabs/RecipeIngredients"
 import RecipeSteps from "./RecipeTabs/RecipeSteps"
 
+// Toda la informacion sobre una receta unica 
+// (imagen, ingredientes, pasos y discusiones)
 
 const recipe_details_tabs = dummyData.recipe_details_tabs.map(item=>({
   ...item,
@@ -44,6 +50,7 @@ const RecipeTabs=({scrollX,onTabPress})=>{
       {/* Tab Indicator */}
       {measureLayout.length > 0 && <TabIndicator 
       measureLayout={measureLayout} scrollX={scrollX}/>}
+   
       {/* Tabs */}
       {recipe_details_tabs.map((item,index)=>{
         return(
@@ -56,7 +63,11 @@ const RecipeTabs=({scrollX,onTabPress})=>{
               alignItems:'center',
               justifyContent:'center'
             }}
-            onPress={()=>onTabPress(index)}
+            onPress={()=>{
+              Keyboard.dismiss()
+              onTabPress(index)
+              }
+            }
           >
             <Text
               style={{
@@ -102,10 +113,15 @@ const TabIndicator = ({measureLayout,scrollX})=>{
   )
 }
 
-
-
-const RecipeDetails = ()=>{
-
+const RecipeDetails = ({route})=>{
+  const navigation = useNavigation()
+  const [selectedRecipe,setSelectedRecipe] = useState(null)
+  
+  useEffect(()=>{
+    const {recipe}=route.params
+    setSelectedRecipe(recipe)
+  },[])
+  
   const flatListRef=useRef()
   const scrollX=useRef(new Animated.Value(0)).current
 
@@ -118,9 +134,104 @@ const RecipeDetails = ()=>{
   return(
     <View
       style={{
-        flex:1
+        flex:1,
+        backgroundColor:COLORS.white
       }}
     >
+
+      {/* Header Bar */}
+      <View
+        style={{
+          flexDirection:'row',
+          position:'absolute',
+          top:SIZES.height > 800 ? 40 : 20,
+          left:0,
+          right:0,
+          paddingHorizontal:SIZES.padding,
+          zIndex:1
+        }}
+      >
+        <>
+          {/* Back */}
+          <View
+            style={{
+              flex:1
+            }} 
+          >
+            <IconButton
+              icon={icons.back2}
+              iconStyle={{
+                width:25,
+                height:25,
+                tintColor:COLORS.black
+              }}
+              containerStyle={{
+                width:40,
+                height:40,
+                alignItems:'center',
+                justifyContent:'center',
+                borderRadius:20,
+                backgroundColor:COLORS.white
+              }}
+              onPress={()=>navigation.goBack()}
+            />
+          </View>
+          
+          {/* Share & Favourite */}
+          <View 
+            style={{
+              flexDirection:'row'
+            }}
+          >
+            <IconButton
+              icon={icons.media}
+              iconStyle={{
+                tintColor:COLORS.white
+              }}
+              containerStyle={{
+                width:50,
+                height:50,
+                alignItems:'center',
+                justifyContent:'center'
+              }}
+            />
+            <IconButton
+              icon={icons.bookmark}
+              iconStyle={{
+                tintColor:COLORS.white
+              }}
+              containerStyle={{
+                width:50,
+                height:50,
+                alignItems:'center',
+                justifyContent:'center'
+              }}
+            />
+          </View>
+        </>
+      </View>
+
+      {/* Image Section */}
+      <View
+        style={{
+          height:SIZES.height>800 ? 220 : 200,
+          alignItems:'center',
+          justifyContent:'center',
+          backgroundColor:COLORS.gray90
+        }}
+      >
+        {/* Miniatura */}
+        <ImageBackground
+          source={selectedRecipe?.image}
+          style={{
+            width:'100%',
+            height:'100%',
+            alignItems:'center',
+            justifyContent:'center'
+          }}
+        />
+      </View>
+
       {/* Tabs */}
       <View
         style={{
@@ -164,9 +275,9 @@ const RecipeDetails = ()=>{
         renderItem={({item,index})=>{
           return(
             <View style={{width:SIZES.width}}>
-              {index == 0 && <RecipeSteps/>}
-              {index == 1 && <Text>Files</Text>}
-              {index == 2 && <Text>Discussions</Text>}
+              {index == 0 && <RecipeSteps selectedRecipe={selectedRecipe}/>}
+              {index == 1 && <RecipeIngredients selectedRecipe={selectedRecipe}/>}
+              {index == 2 && <RecipeDiscussions selectedRecipe={selectedRecipe}/>}
             </View>
           )
         }}

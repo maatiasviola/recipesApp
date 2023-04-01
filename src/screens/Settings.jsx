@@ -1,9 +1,8 @@
-import { StyleSheet, Text, View,Image, ScrollView, SafeAreaView } from "react-native"
+import { StyleSheet, View, ScrollView } from "react-native"
 import { ProfileSection1,ProfileSection2 } from "../components/Settings/ProfileSections"
-import ListOfSettings from "../components/Settings/ProfileSections"
 import ProfileCard from "../components/Settings/ProfileCard"
 import SettingsHeader from "../components/Settings/SettingsHeader"
-import { COLORS, FONTS, icons, SIZES } from "../constants"
+import { COLORS, SIZES } from "../constants"
 
 const Settings = ()=>{
   return(
@@ -17,7 +16,11 @@ const Settings = ()=>{
       >
         {/* Profile Card */}
         <ProfileCard/>
+        
+        {/* Settings section 1 */}
         <ProfileSection1/>
+
+        {/* Settings section 2 */}
         <ProfileSection2/>
       </ScrollView>
     </View>

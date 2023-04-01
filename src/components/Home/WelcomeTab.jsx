@@ -1,5 +1,8 @@
 import { Text, Image, View,StyleSheet,TouchableOpacity } from "react-native"
-import { COLORS, FONTS, SIZES } from "../constants"
+import { COLORS, FONTS, SIZES } from "../../constants"
+
+// Cabecera de la pagina "Home"
+// "Bienvenida" al usuario
 
 const WelcomeTab = () =>{
   return(
@@ -9,7 +12,7 @@ const WelcomeTab = () =>{
         <Text style={styles.secondaryText}>What do you want to cook today?</Text>
       </View>
       <TouchableOpacity onPress={()=>console.log("Profile")}>
-        <Image style={styles.profile} source={require('../assets/images/dummy_profiles/profile-pic-1.png')}/>
+        <Image style={styles.profile} source={require('../../assets/images/dummy_profiles/profile-pic-1.png')}/>
       </TouchableOpacity>
     </View>
   )

@@ -2,12 +2,15 @@ import { StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
 import { COLORS, FONTS, icons, SIZES } from '../../constants'
 import dummyData from '../../constants/dummyData'
 
-const {trendingRecipes}=dummyData
-const dummy_profile=trendingRecipes[0].author
+//Tarjeta de usuario (foto,nombre,info y boton para volverse miembro)
+
+//Obtengo usuario hardcodeado
+const dummy_profile=dummyData.trendingRecipes[0].author
 
 const ProfileCard = ()=>{
   return(
     <View style={styles.container}>
+      
       {/* Profile Image */}
       <TouchableOpacity
         style={{
@@ -48,9 +51,12 @@ const ProfileCard = ()=>{
       <View style={styles.infoContainer}>
         <Text style={{...FONTS.h2, color:COLORS.white}}>{dummy_profile.name}</Text>
         <Text style={{...FONTS.body4,color:COLORS.white}}>More info bla bla bla</Text>
+        
+        {/* Become Member Button */}
         <View style={styles.memberContainer}>
           <Text style={{color:COLORS.primary,...FONTS.h3}}>+ Become Member</Text>
         </View>
+      
       </View>
     </View>
   )

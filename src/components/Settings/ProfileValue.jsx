@@ -1,14 +1,12 @@
 import { StyleSheet, Text, TouchableOpacity,View,Image } from "react-native"
 import { COLORS, FONTS, icons, SIZES } from "../../constants"
 
+//Unidad que compone el componente ProfileSections
+
 const ProfileValue=({icon,label,value,onPress})=>{
   return(
     <TouchableOpacity
-      style={{
-        flexDirection:'row',
-        height:80,
-        alignItems:'center'
-      }}
+      style={styles.container}
       onPress={onPress}
     >
       {/* Icon */}
@@ -57,6 +55,11 @@ const ProfileValue=({icon,label,value,onPress})=>{
 }
 
 const styles=StyleSheet.create({
+  container:{
+    flexDirection:'row',
+    height:80,
+    alignItems:'center'
+  },
   iconContainer:{
     backgroundColor:COLORS.additionalColor11,
     borderRadius:20,

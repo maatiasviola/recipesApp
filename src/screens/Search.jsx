@@ -1,18 +1,23 @@
 import { useState } from "react"
 import { ScrollView, StyleSheet, View,Text, FlatList } from "react-native"
-import CategoryCard from "../components/CategoryCard"
+import CategoryCard from "../components/Search/CategoryCard"
 import SearchInput from "../components/SearchInput"
 import TextButton from "../components/TextButton"
 import { COLORS, dummyData, FONTS, SIZES } from "../constants"
 import { useNavigation } from "@react-navigation/native"
 
+//Página de busqueda: buscador, top busquedas, categorias
+
 const Search = ()=>{
   const [activeTopSearch,setActiveTopSearch]=useState(dummyData.top_searches[0].label)
   const navigation=useNavigation()
-  
+
   return(
     <View style={styles.container}>
+      
+      {/* Buscador */}
       <SearchInput/>
+      
       <ScrollView
         contentContainerStyle={{
           paddingBottom:300
@@ -21,13 +26,11 @@ const Search = ()=>{
         scrollEventThrottle={16}
         keyboardDismissMode='on-drag'
       >
+        
         {/* Top Searches */}
         <View style={styles.topSearches}>
           <Text 
-            style={{
-              marginHorizontal:SIZES.padding,
-              ...FONTS.h2
-              }}
+            style={styles.subtitle}
             >
             Top Searches
           </Text>
@@ -43,7 +46,6 @@ const Search = ()=>{
             renderItem={({item,index})=>(
               <TextButton
                 value={item.label}
-                active={item.label===activeTopSearch}
                 onPress={()=>setActiveTopSearch(item.label)}
                 containerStyle={{
                   paddingVertical:SIZES.radius,
@@ -55,10 +57,14 @@ const Search = ()=>{
                     ? SIZES.padding 
                     : 0,
                   borderRadius:SIZES.radius,
-                  backgroundColor:COLORS.gray10
+                  backgroundColor:item.label===activeTopSearch 
+                    ? COLORS.primary 
+                    : COLORS.gray10,
                 }}
                 labelStyle={{
-                  color:COLORS.gray50,
+                  color:item.label===activeTopSearch 
+                  ? COLORS.white 
+                  : COLORS.gray50,
                   ...FONTS.h3
                 }}
               />
@@ -72,7 +78,11 @@ const Search = ()=>{
             marginTop:SIZES.padding
           }}
         >
-          <Text style={{...FONTS.h2,marginHorizontal:SIZES.padding}}>Browse Categories</Text>
+          <Text 
+            style={styles.subtitle}
+          >
+            Browse Categories
+          </Text>
           
           <FlatList
             data={dummyData.categoriesSearch}
@@ -117,6 +127,10 @@ const styles=StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     flex:1
+  },
+  subtitle:{
+    marginHorizontal:SIZES.padding,
+    ...FONTS.h2
   }
 })
 

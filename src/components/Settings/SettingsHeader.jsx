@@ -2,6 +2,8 @@ import { StyleSheet, Text, View } from "react-native"
 import { COLORS, icons,SIZES,FONTS } from "../../constants"
 import IconButton from "../IconButton"
 
+//Titulo seccion de Profile e icono light/dark mode
+
 const SettingsHeader = ()=>{
   return(
     <View style={styles.header}>

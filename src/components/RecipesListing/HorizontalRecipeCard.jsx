@@ -1,5 +1,5 @@
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { COLORS, FONTS, icons, SIZES } from "../constants"
+import { COLORS, FONTS, icons, SIZES } from "../../constants"
 
 const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
   return(
@@ -10,7 +10,7 @@ const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
       }}
       onPress={onPress}
     >
-      {/* Thumbnail */}
+      {/* Miniatura */}
       <ImageBackground
         source={recipe?.image}
         resizeMode="cover"
@@ -19,6 +19,7 @@ const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
           borderRadius:SIZES.radius
         }}
       >
+        {/* Bookmark */}
         <View style={styles.info}>
           <Image
             source={recipe.isBookmark? icons.bookmarkFilled : icons.bookmark}
@@ -31,6 +32,8 @@ const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
           />
         </View>
       </ImageBackground>
+
+      {/* Info */}
       <View
         style={{
           flex:1,
