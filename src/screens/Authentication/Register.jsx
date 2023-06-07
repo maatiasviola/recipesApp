@@ -1,17 +1,11 @@
 import { useState } from "react"
 import { Image,View } from "react-native"
 import CountryModal from "../../components/Authentication/CountryModal"
-import SignIn from "../../components/Authentication/SignIn"
 import SignUp from "../../components/Authentication/SignUp"
 import { COLORS, images, SIZES } from "../../constants"
 
-const AuthMain = ()=>{
+const Register = ()=>{
   
-  //States
-<<<<<<< HEAD
-  const [mode,setMode]=useState("signIn")
-=======
->>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
 
   //Country
   const [countries,setCountries] = useState([])
@@ -50,15 +44,6 @@ const AuthMain = ()=>{
         }}
       />
 
-      {
-      mode === "signIn" && 
-        <SignIn 
-          email={email} setEmail={setEmail}
-          password={password} setPassword={setPassword}
-          setMode={setMode}
-        />
-       }
-       {mode === 'signUp' &&
         <SignUp
           alias={alias} setAlias={setAlias}  
           email={email} setEmail={setEmail}
@@ -69,10 +54,9 @@ const AuthMain = ()=>{
           selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry}
           setMode={setMode}
         />
-      }
       
     </View>
   )
 }
 
-export default AuthMain
+export default Register

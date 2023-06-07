@@ -32,7 +32,11 @@ const Search = ()=>{
           <Text 
             style={styles.subtitle}
             >
+<<<<<<< HEAD
             Top Searches
+=======
+            Búsquedas principales
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
           </Text>
           <FlatList 
             horizontal
@@ -81,7 +85,11 @@ const Search = ()=>{
           <Text 
             style={styles.subtitle}
           >
+<<<<<<< HEAD
             Browse Categories
+=======
+            Navegar categorias
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
           </Text>
           
           <FlatList

@@ -7,7 +7,11 @@ const RecipeCardDetails = ({recipeItem})=>{
       
       {/*Name & Bookmark*/}
       <View style={styles.upperDetails}>
+<<<<<<< HEAD
         <Text style={styles.name}>{recipeItem.name}</Text>
+=======
+        <Text style={styles.name}>{recipeItem.nombre}</Text>
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
         <Image 
           source={recipeItem.isBookmark 
             ? icons.bookmarkFilled 
@@ -23,7 +27,11 @@ const RecipeCardDetails = ({recipeItem})=>{
       </View>
 
       {/*Duration & Serving*/}
+<<<<<<< HEAD
       <Text style={styles.details}>{recipeItem.duration} | {recipeItem.serving} Serving</Text>
+=======
+      <Text style={styles.details}> {recipeItem.porciones} Porciones | {recipeItem.cantidadPersonas} Personas</Text>
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
     
     </View>
   )

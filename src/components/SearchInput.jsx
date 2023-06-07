@@ -8,7 +8,11 @@ const SearchInput = () => {
       <TextInput 
         style={styles.input}
         placeholderTextColor={COLORS.gray}
+<<<<<<< HEAD
         placeholder='Search Recipes'
+=======
+        placeholder='Buscar Recetas'
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
       />
     </View>
   )

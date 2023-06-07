@@ -94,7 +94,11 @@ const RecipeDiscussions= ()=>{
                   <Text
                     style={{
                       flex:1,
+<<<<<<< HEAD
                       textAling:'right',
+=======
+                      textAlign:'right',
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
                       ...FONTS.h4
                     }}
                   >

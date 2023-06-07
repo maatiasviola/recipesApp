@@ -18,7 +18,11 @@ const MyRecipesTab = ()=>{
         
         {/* N° Recipes */}
         <Text style={styles.mainText}>
+<<<<<<< HEAD
           You have 12 recipes that you haven´t tried yet
+=======
+          Tienes 12 recetas que no has intentado
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
         </Text>
         
         {/* See Recipes */}
@@ -27,7 +31,11 @@ const MyRecipesTab = ()=>{
           onPress={()=>navigation.navigate("RecipeListing")}
         >
           <Text style={styles.linkText}>
+<<<<<<< HEAD
             See Recipes
+=======
+            Ver recetas
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
           </Text>
         </TouchableOpacity>
       </View>

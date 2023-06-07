@@ -2,8 +2,17 @@ import { ImageBackground, StatusBar, View,Text, StyleSheet } from "react-native"
 import { COLORS, FONTS, images, SIZES } from "../constants"
 import { LinearGradient } from "expo-linear-gradient"
 import CustomButton from "../components/CustomButton"
+<<<<<<< HEAD
 
 const Login = ({navigation})=>{
+=======
+import { useState } from "react"
+
+
+const Login = ({navigation})=>{
+  const [mode,setMode]=useState("signIn")
+
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
   return(
     <View
       style={styles.container}
@@ -33,7 +42,12 @@ const Login = ({navigation})=>{
             <Text
               style={styles.mainHeadingText}
             >
+<<<<<<< HEAD
               Cooking a Delicious Food Easily
+=======
+              Compartiendo recetas
+              
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
             </Text>
           </LinearGradient>
         </ImageBackground>
@@ -47,25 +61,47 @@ const Login = ({navigation})=>{
         <Text
           style={styles.subHeadingText}
         >
+<<<<<<< HEAD
           Discover more than 1200 food recipes in your hands
           and cooking it easily!
+=======
+          Descubre miles de recetas de comidas
+           y preparalas fácilmente!
+          
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
         </Text>
 
         {/* Buttons */}
         <View style={styles.buttonsContainer}>
+<<<<<<< HEAD
           {/* Login */}
           <CustomButton
             buttonText="Login"
             colors={[COLORS.darkGreen,COLORS.lime]}
             onPress={()=>navigation.replace("Authorization")}
+=======
+          
+          {/* SignIn */}
+          <CustomButton
+            buttonText="Inicia sesión"
+            colors={[COLORS.darkGreen,COLORS.lime]}
+            onPress={()=>navigation.replace("SignIn")}
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
             buttonContainerStyle={styles.loginButton}
           />
 
           {/* SignUp */}
           <CustomButton
+<<<<<<< HEAD
             buttonText="Sign Up"
             colors={[]}
             onPress={()=>navigation.replace("Home")}
+=======
+            buttonText="Registrate"
+            colors={[]}
+            onPress={()=>navigation.replace("SignUp")}
+
+>>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
             buttonContainerStyle={styles.signUpButton}
           />
         </View>
