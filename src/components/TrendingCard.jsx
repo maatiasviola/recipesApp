@@ -6,20 +6,12 @@ const TrendingCard = ({containerStyle,recipeItem,onPress})=>{
   return(
     <TouchableOpacity style={[styles.container, {...containerStyle}]} onPress={onPress}>
       <Image
-<<<<<<< HEAD
-        source={recipeItem.image}
-=======
         source={recipeItem.foto.urlFoto}
->>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
         resizeMode='cover'
         style={styles.image}
       />
       <View style={styles.categoryContainer}>
-<<<<<<< HEAD
-        <Text style={styles.categoryText}>{recipeItem.category}</Text>
-=======
         <Text style={styles.categoryText}>{recipeItem.tipo.descripcion}</Text>
->>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
       </View>
 
       <RecipeCardInfo

@@ -50,19 +50,11 @@ const ProfileCard = ()=>{
       {/* Details Section */}
       <View style={styles.infoContainer}>
         <Text style={{...FONTS.h2, color:COLORS.white}}>{dummy_profile.name}</Text>
-<<<<<<< HEAD
-        <Text style={{...FONTS.body4,color:COLORS.white}}>More info bla bla bla</Text>
-        
-        {/* Become Member Button */}
-        <View style={styles.memberContainer}>
-          <Text style={{color:COLORS.primary,...FONTS.h3}}>+ Become Member</Text>
-=======
         <Text style={{...FONTS.body4,color:COLORS.white}}>Más información</Text>
         
         {/* Become Member Button */}
         <View style={styles.memberContainer}>
           <Text style={{color:COLORS.primary,...FONTS.h3}}>+ Hazte miembro</Text>
->>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
         </View>
       
       </View>

@@ -55,8 +55,17 @@ const salt = require("../assets/icons/salt.png")
 const sugar = require("../assets/icons/sugar.png")
 const shrimp = require("../assets/icons/shrimp.png")
 const tomato = require("../assets/icons/tomato.png")
+const confirmPassword =require('../assets/icons/confirmPassword.png')
+const errorIcon = require('../assets/icons/errorIcon.png')
+const warningIcon = require('../assets/icons/warningIcon.png')
+const servings = require('../assets/icons/serving.png')
+const plus = require('../assets/icons/plus.png')
 
 export default {
+    plus,
+    servings,
+    errorIcon,
+    warningIcon,
     arrow_down_fill,
     bookmark,
     bookmarkFilled,
@@ -114,4 +123,5 @@ export default {
     pepper,
     salt,
     sugar,
+    confirmPassword
 }

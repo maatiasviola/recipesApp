@@ -25,7 +25,19 @@ const UserProfile8 = require("../assets/images/dummy_profiles/profile-pic-8.png"
 const UserProfile9 = require("../assets/images/dummy_profiles/profile-pic-9.png")
 const UserProfile10 = require("../assets/images/dummy_profiles/profile-pic-10.png")
 
+const success = require('../assets/images/success.png')
+const error = require('../assets/images/error.png')
+const x = require('../assets/images/x.png')
+const galeria = require('../assets/images/galeria.png')
+const camara = require('../assets/images/camara.png')
+const defaultUser = require('../assets/images/defaultuser.png')
+const defaultImage = require('../assets/images/defaultImage.png')
+
 export default {
+    defaultImage,
+    galeria,
+    camara,
+    defaultUser,
     loginBackground,
     logo,
     recipe,
@@ -49,4 +61,7 @@ export default {
     bg_4,
     bg_5,
     bg_6,
+    success,
+    error,
+    x
 }

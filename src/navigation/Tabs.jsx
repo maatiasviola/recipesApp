@@ -1,10 +1,11 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import Home from '../screens/Home';
+import Home from '../screens/Home/Home';
 import {COLORS,icons} from '../constants'
 import TabIcon from '../components/TabIcon';
-import Settings from "../screens/Settings";
-import Search from "../screens/Search";
-import RecipesListing from "../screens/RecipesListing";
+import Settings from "../screens/Settings/Settings";
+import Search from "../screens/Search/Search";
+import RecipesListing from "../screens/RecipesListing/RecipesListing";
+import CreateRecipe from "../screens/CreateRecipe/CreateRecipe";
 
 const {Screen,Navigator} = createBottomTabNavigator()
 
@@ -43,6 +44,13 @@ const Tabs = ()=>{
         options={{
           tabBarIcon:({focused})=><TabIcon focused={focused}
           icon={icons.search}/>}}
+      />
+      <Screen 
+        name='/Create' 
+        component={CreateRecipe}
+        options={{
+          tabBarIcon:({focused})=><TabIcon focused={focused}
+          icon={icons.plus}/>}}
       />
       <Screen 
         name='/Bookmark' 

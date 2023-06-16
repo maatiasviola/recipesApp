@@ -1,4 +1,5 @@
 import { Dimensions } from "react-native";
+import icons from "./icons";
 const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
@@ -46,6 +47,7 @@ export const COLORS = {
 
     transparent: 'transparent',
 };
+
 export const SIZES = {
     // global sizes
     base: 8,
@@ -82,6 +84,51 @@ export const FONTS = {
     body5: { fontFamily: "RobotoRegular", fontSize: SIZES.body5, lineHeight: 22 },
 };
 
-const appTheme = { COLORS, SIZES, FONTS };
+export const VARIANTS = {
+    //red
+    red: { 
+        mainColor: "#FDEDED",
+        secondaryColor: "#F16360", 
+        symbol: "error",
+        title: "Error",
+        text: "The action was not carried out succesfully please try again.",
+    },
+    //blue
+    blue: {
+      mainColor: "#E5F6FD",
+      secondaryColor: "#1AB1F5",
+      symbol: "info",
+      icon:icons.errorIcon,
+      title: "Information",
+      text: "Our newest module can be bought, or you can always just use our 30 day trial.",
+    },
+    //green
+    green: {
+      mainColor: "#EDFEEE",
+      secondaryColor: "#5CB660",
+      symbol: "check_circle",
+      title: "Success",
+      text: "Saving of your newest settings are successfuly carried out. ",
+    },
+    //yellow
+    yellow: {
+      mainColor: "#FFF4E5",
+      secondaryColor: "#FFA117",
+      symbol: "warning",
+      icon:icons.warningIcon,
+      title: "Warning",
+      text: "Your trial is ending soon, please click here to renew it.",
+    },
+    //pink
+    pink: {
+      mainColor: "#FFC0CB",
+      secondaryColor: "#FF69B4",
+      symbol: "pets",
+      title: "Check it out",
+      text: "Fun and cute pictures of dogs are to be released daily from now on!",
+    },
+}
+
+const appTheme = { COLORS, SIZES, FONTS,VARIANTS };
 
 export default appTheme;

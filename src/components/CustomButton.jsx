@@ -16,11 +16,7 @@ const CustomButton=({buttonText,buttonContainerStyle,colors,onPress})=>{
         >
           <Text
             style={{
-<<<<<<< HEAD
-              textAling:'center',
-=======
               textAlign:'center',
->>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
               color:COLORS.white,
               ...FONTS.h3
             }}
@@ -38,11 +34,7 @@ const CustomButton=({buttonText,buttonContainerStyle,colors,onPress})=>{
       >
         <Text
           style={{
-<<<<<<< HEAD
-            textAling:'center',
-=======
             textAlign:'center',
->>>>>>> 54e3129a79bfc4e7db761319b014ee571138faaf
             color:COLORS.white,
             ...FONTS.h3
           }}
