@@ -25,6 +25,7 @@ const Home = ({navigation})=>{
   useEffect(()=>{
     recetasService.obtenerTresUltimasRecetas()
     .then(response=>{
+      console.log("TRES ULTIMAS: ",response)
       setUltimasRecetas(response)
     })
     .catch(error => {

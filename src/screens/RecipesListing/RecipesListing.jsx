@@ -2,8 +2,9 @@
 import styles from './styles'
 import { COLORS, dummyData, FONTS, icons, images, SIZES } from "../../constants"
 
-// Hooks
+// Hooks & Services
 import { useState } from 'react'
+import busquedaService from '../../Servicios/busqueda'
 
 // Components
 import { FlatList, Image, Text, View, TouchableOpacity } from "react-native"
@@ -12,29 +13,29 @@ import IconButton from "../../components/IconButton"
 import LineDivider from "../../components/LineDivider"
 import FilterModal from '../../components/FilterModal'
 import ModalPopUp from '../../components/ModalPopUp'
+import { useEffect } from 'react'
 
 {/* Pagina resultados de busqueda */}
 
 const RecipesListing = ({navigation,route})=>{
-  const [resultados,setResultados] = useState(dummyData.trendingRecipes) // cuando este conectado con la bdd reemplazar useState([])
+  const [resultados,setResultados] = useState([])
   
   const {nombre,categoria} = route.params
 
   const [filtrosVisible,setFiltrosVisible] = useState(false)
 
-  {/* 
   useEffect(()=>{
     if(nombre){
-      // realizar llamada por categoria
-      // setResultados(response)
+      busquedaService.buscarRecetaPorNombre(nombre)
+        .then(response=>setResultados(response))
+        .catch(error=>console.log(error))
     }else if (categoria){
-      // realizar llamada por categoria
-      // setResultados(response)
-    } else{
-      setResultados([])
+      busquedaService.buscarRecetaPorCategoria(categoria.idTipo)
+        .then(response=>setResultados(response))
+        .catch(error=>console.log(error))
     }
   },[nombre,categoria])
-*/}
+
   return(
     <>
       <ModalPopUp

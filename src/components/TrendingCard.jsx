@@ -3,6 +3,7 @@ import { COLORS, FONTS, SIZES } from "../constants"
 import RecipeCardInfo from "./RecipeCardInfo"
 
 const TrendingCard = ({containerStyle,recipeItem,onPress})=>{
+  console.log(recipeItem)
   return(
     <TouchableOpacity style={[styles.container, {...containerStyle}]} onPress={onPress}>
       <Image

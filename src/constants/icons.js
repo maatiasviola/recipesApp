@@ -60,8 +60,18 @@ const errorIcon = require('../assets/icons/errorIcon.png')
 const warningIcon = require('../assets/icons/warningIcon.png')
 const servings = require('../assets/icons/serving.png')
 const plus = require('../assets/icons/plus.png')
+const editar = require('../assets/icons/editar.png')
+const star_filled = require('../assets/icons/star_filled.png')
+const star_corner = require('../assets/icons/star_corner.png')
+const guardar = require('../assets/icons/guardar.png')
+const valorar = require('../assets/icons/valorar.png')
 
 export default {
+    guardar,
+    valorar,
+    star_filled,
+    star_corner,
+    editar,
     plus,
     servings,
     errorIcon,

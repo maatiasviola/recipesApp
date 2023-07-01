@@ -61,6 +61,13 @@ const Tabs = ()=>{
           icon={icons.bookmark}/>}}
       />
       <Screen 
+        name='/Editadas' 
+        component={CreateRecipe}
+        options={{
+          tabBarIcon:({focused})=><TabIcon focused={focused}
+          icon={icons.editar}/>}}
+      />
+      <Screen 
         name='/Settings' 
         component={Settings}
         options={{

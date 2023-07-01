@@ -135,7 +135,7 @@ const RecipeDetails = ({route})=>{
     const {recipe}=route.params
     setSelectedRecipe(recipe)
   },[])
-  
+
   // Manejar solapas
   const flatListRef=useRef()
   const scrollX=useRef(new Animated.Value(0)).current
@@ -186,7 +186,7 @@ const RecipeDetails = ({route})=>{
         
         {/* Miniatura */}
         <ImageBackground
-          source={selectedRecipe?.image}
+          source={selectedRecipe?.foto.urlFoto}
           style={styles.image}
         />
       </View>
@@ -230,7 +230,8 @@ const RecipeDetails = ({route})=>{
           return(
             <View style={{width:SIZES.width}}>
               {index == 0 && <RecipeSteps selectedRecipe={selectedRecipe}/>}
-              {index == 1 && <RecipeIngredients selectedRecipe={selectedRecipe}/>}
+              {index == 1 && <RecipeIngredients setSelectedRecipe={setSelectedRecipe} 
+                                                selectedRecipe={selectedRecipe}/>}
               {index == 2 && <RecipeDiscussions setSelectedRecipe={setSelectedRecipe} 
                                                 selectedRecipe={selectedRecipe}/>}
             </View>

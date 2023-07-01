@@ -5,16 +5,17 @@ import styles from './styles'
 import { Animated, View } from "react-native"
 import IngredientCard from "../../../components/IngredientCard";
 
-const RecipeIngredients = ({selectedRecipe})=>{
+const RecipeIngredients = ({selectedRecipe,setSelectedRecipe})=>{
+
   return(
     <View style={styles.container}>
       <Animated.FlatList
-        data={selectedRecipe?.ingredients} // fijarse como llega el atributo
-        keyExtractor={ingredient=>ingredient.id}
+        data={selectedRecipe?.utilizados}
+        keyExtractor={utilizados=>utilizados.idUtilizado}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
-        renderItem={({item:ingredient})=>(
-          <IngredientCard ingredient={ingredient}/>
+        renderItem={({ item:utilizados})=>(
+          <IngredientCard key={utilizados} setSelectedRecipe={setSelectedRecipe} utilizados={utilizados}/>
         )}
       />
     </View>

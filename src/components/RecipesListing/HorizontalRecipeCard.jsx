@@ -12,7 +12,7 @@ const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
     >
       {/* Miniatura */}
       <ImageBackground
-        source={recipe?.image}
+        source={recipe?.foto.urlFoto}
         resizeMode="cover"
         style={styles.image}
         imageStyle={{
@@ -47,7 +47,7 @@ const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
             fontSize:18
           }}
         >
-          {recipe?.name}
+          {recipe?.nombre}
         </Text>
 
         {/* User & Duration */}
@@ -64,7 +64,7 @@ const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
               color:COLORS.gray
             }}
           >
-            By {recipe?.author.name}
+            Por {recipe?.nombreUsuario}
           </Text>
           <View
             style={{
@@ -88,7 +88,7 @@ const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
                 marginLeft:SIZES.base
               }}
             >
-              {recipe?.duration}
+              {recipe?.descripcion}
             </Text>
           </View>
         </View>
@@ -116,7 +116,7 @@ const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
               ...FONTS.h3,
             }}
           >
-            4.9
+            {recipe?.valoracionGeneral}
           </Text>
         </View>
       </View>

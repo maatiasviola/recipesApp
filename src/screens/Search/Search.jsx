@@ -2,19 +2,32 @@
 import styles from './styles'
 import { dummyData, SIZES } from "../../constants"
 
-// Hooks
+// Hooks & Services
 import { useNavigation } from "@react-navigation/native"
+import busquedaService from '../../Servicios/busqueda'
 
 // Components
 import { ScrollView, View,Text, FlatList } from "react-native"
 import CategoryCard from "../../components/Search/CategoryCard"
 import SearchInput from "../../components/SearchInput"
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 {/*Página de busqueda: buscador, top busquedas, categorias*/}
 
 const Search = ()=>{
 
   const navigation=useNavigation()
+
+  const [categorias,setCategorias] = useState([])
+
+  useEffect(()=>{
+    busquedaService.obtenerCategorias()
+      .then(response=>{
+        const categoriasRecortadas = response.slice(0,6)
+        setCategorias(categoriasRecortadas)
+      })
+  },[])
 
   return(
     <View style={styles.container}>
@@ -41,7 +54,7 @@ const Search = ()=>{
           
           {/* Categorias */}
           <FlatList
-            data={dummyData.categoriesSearch}
+            data={categorias}
             numColumns={2}
             scrollEnabled={false}
             listKey='BrowseCategories'
@@ -51,6 +64,7 @@ const Search = ()=>{
             }}
             renderItem={({item,index})=>(
               <CategoryCard
+                key={item.idTipo}
                 category={item}
                 containerStyle={{
                   height:130,

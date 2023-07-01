@@ -32,8 +32,7 @@ const recuperarRecetasDispositivo = async () => {
 };
 
 const obtenerTresUltimasRecetas = async()=>{
-  const {data} = await axios.get(`${URL}/getAllUsuarios`)
-  console.log("TRES RECETAS: ",data)
+  const {data} = await axios.get(`${URL}/ultimasTresRecetas`)
   return data
 }
 
@@ -42,9 +41,23 @@ const obtenerRecetasIntentar = async(idUsuario) =>{
   return data
 }
 
+const valorarReceta = async(idUsuario,idReceta,valoracion) =>{
+  const {data} = await axios.post(`${URL}/insertarCalificacionValoracion?idUsuario=${idUsuario}&idReceta=${idReceta}&valoracion${valoracion}`)
+  return data
+}
+
+const validarNombreReceta = async(NombreReceta,idUsuario) =>{​​​​​​​​
+  const {​​​​​​​​data}​​​​​​​​ = awaitaxios.get(`${​​​​​​​​URL}​​​​​​​​/validarNombre/${​​​​​​​​NombreReceta.nombre}​​​​​​​​/${​​​​​​​​idUsuario}​​​​​​​​`)
+  return data
+  }​​​​​​​
+  
+  
+
 export default {
   guardarRecetaDispositivo,
   recuperarRecetasDispositivo,
   obtenerTresUltimasRecetas,
-  obtenerRecetasIntentar
+  obtenerRecetasIntentar,
+  valorarReceta,
+  validarNombreReceta
 }

@@ -15,6 +15,7 @@ import ForgotPassword from './src/screens/ForgotPassword/ForgotPassword';
 import CodeVerification from './src/screens/SignUpCodeVerification/SignUpCodeVerification';
 import { UserContextProvider } from './src/Context/UserContext';
 import RecetasAIntentar from './src/screens/RecetasAIntentar/RecetasAIntentar';
+import ValorarReceta from './src/screens/ValorarReceta/ValorarReceta';
 
 const Stack=createStackNavigator()
 const options={
@@ -101,6 +102,11 @@ export default function App() {
           <Stack.Screen 
             name="RecipeDetails"
             component={RecipeDetails}  
+          />
+
+          <Stack.Screen 
+            name="ValorarReceta"
+            component={ValorarReceta}  
           />
 
           <Stack.Screen 

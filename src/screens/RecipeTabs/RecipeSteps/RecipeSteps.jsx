@@ -1,21 +1,31 @@
 // CSS & Constants
 import styles from './styles'
-import { FONTS, icons, images, SIZES } from "../../../constants"
+import { FONTS, icons, SIZES } from "../../../constants"
 import dummyData from '../../../constants/dummyData'
+
+// Services
+import recetasService from '../../../Servicios/recetas'
 
 // Components
 import { Image, Text, View } from "react-native"
 import LineDivider from "../../../components/LineDivider"
 import RecipeStepCard from "../../../components/RecipeStepCard"
 import TextButton from "../../../components/TextButton"
+import { FloatingAction } from 'react-native-floating-action'
 
 const RecipeSteps = ({selectedRecipe}) =>{
   const acciones = [
     {
       text: 'Valorar Receta',
-      icon: images.defaultUser,
+      icon: icons.valorar,
       name: 'Valorar',
       position: 1
+    },
+    {
+      text: 'Guardar Receta',
+      icon: icons.guardar,
+      name: 'Guardar',
+      position: 2
     }
   ];
   return(
@@ -24,7 +34,14 @@ const RecipeSteps = ({selectedRecipe}) =>{
         actions={acciones}
         onPressItem={(name) => {
           if (name === 'Valorar') {
-            navigation.navigate('Valorar');
+            navigation.navigate('ValorarReceta',{receta:selectedRecipe})
+          }else if(name === 'Guardar'){
+            recetasService.guardarRecetaDispositivo(selectedRecipe)
+              .then(response=>{
+                console.log(response)
+                console.log("Receta guardada con exito")
+              })
+              .catch(error=>console.log(error))
           }
         }}
       />

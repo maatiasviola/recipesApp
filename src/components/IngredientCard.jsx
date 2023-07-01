@@ -1,17 +1,21 @@
-import { Image, StyleSheet, View,Text } from "react-native"
+import { Image, StyleSheet, View,Text, TextInput } from "react-native"
 import { COLORS, FONTS } from "../constants"
 
-const IngredientCard = ({ingredient})=>{
+const IngredientCard = ({utilizados})=>{
   return(
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image source={ingredient.icon} style={styles.image}/>
-      </View>
       <View style={styles.descriptionContainer}>
-        <Text style={styles.text}>{ingredient.description}</Text>
+        <Text style={styles.text}>{utilizados?.ingrediente?.nombre}</Text>
       </View>
       <View style={styles.quantityContainer}>
-        <Text style={styles.text}>{ingredient.quantity}</Text>
+        <TextInput 
+          style={styles.text}
+          value={utilizados?.cantidad}
+        />
+        <TextInput 
+          style={styles.text}
+          value={utilizados?.unidad.descripcion}
+        />
       </View>
     </View>
   )
