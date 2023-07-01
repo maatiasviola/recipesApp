@@ -3,9 +3,10 @@ import styles from './styles'
 import { COLORS, FONTS, icons, images, SIZES } from "../../../constants"
 import { expresiones } from "../../../constants/expresiones";
 
-// Hooks
+// Hooks & Services
 import { useState } from "react"
 import { useNavigation } from '@react-navigation/native';
+import userService from '../../../Servicios/user';
 
 // Components
 import { TouchableOpacity,Text,View,Image } from "react-native"
@@ -15,8 +16,12 @@ import IconButton from "../../IconButton"
 import TextButton from "../../TextButton"
 import ModalPopUp from "../../ModalPopUp"
 import LoginOption from '../LoginOptions/LoginOption';
+import { useContext } from 'react';
+import UserContext from '../../../Context/UserContext'
 
 const SignIn = () => {
+
+  const {setUser} = useContext(UserContext)
 
   // modal error credenciales invalidas
   const [errorModalVisible,setErrorModalVisible] = useState(false)
@@ -37,21 +42,16 @@ const SignIn = () => {
 
   const handlePressLogin = () => {
     if (email.valido === 'true' && password.valido === 'true'){
-      // get a bdd
-      {/*axios.get ('http://localhost:8080/Recetas/Controller/login/'+email+'/'+password+'')
-        .then(response => {
-          // Aquí puedes manejar la respuesta de la API, que debe ser el objeto de usuario
-          const user = response.data;
-          console.log(user); // Puedes mostrarlo en la consola o guardarlo en el estado de tu componente
+      userService.login(email.campo,password.campo)
+        .then(response=>{
+          setUser(response)
           navigation.navigate("Home");
         })
-        .catch(error => {
-          // Manejar errores de la solicitud o del servidor
+        .catch(() => {
           setErrorModalVisible(true)
-          console.error(error);
+          setEmail({campo:'',valido:null})
+      setPassword({campo:'',valido:null})
         });
-      */}
-      navigation.navigate("Home");
     }else{
       setEmail({campo:'',valido:null})
       setPassword({campo:'',valido:null})
@@ -61,15 +61,8 @@ const SignIn = () => {
   {/* Enviar codigo cambio de contraseña */}
   const handlePressSendCode = ()=>{
     if(emailRequest.valido==='true'){
-      // hacer una peticion para verificar que el mail existe?
-      
-      // si existe
       setRequestModalVisible(false)
       navigation.navigate("CodeVerification",{mail:emailRequest})
-
-      // si no existe
-      //setEmailRequest({campo:'',valido:'false'})
-      //setLeyendaErrorCorreoRecupero("El correo ingresado no existe, por favor ingrese otro")
     }else{
       setEmailRequest({campo:'',valido:'false'})
       setLeyendaErrorCorreoRecupero("Correo mal ingresado")

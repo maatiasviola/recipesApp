@@ -3,9 +3,10 @@ import styles from './styles'
 import { images, SIZES } from "../../constants"
 import { expresiones } from "../../constants/expresiones";
 
-// Hooks 
+// Hooks & Services
 import { useState,useEffect } from "react"
 import { useNavigation } from '@react-navigation/native';
+import contraseñaService from '../../Servicios/contraseña';
 
 // Components
 import { Text,View,Image } from "react-native"
@@ -28,20 +29,22 @@ const SignUpCodeVerification = ({route}) => {
   const {mail} = route.params
 
   useEffect(()=>{
-    console.log("mail: ",mail)
-    //hacer el post para enviar el mail con el codigo
+    contraseñaService.enviarCodigo(mail.campo)
+      .then(response=>console.log(response))
+      .catch(error=>console.log(error))
   })
 
   {/* Cuando ingresa codigo el usuario */}
   const handleSubmit = () =>{
     // verificar codigo
     if(code.valido==='true'){
-      // hacer el check con la bdd --> si todo bien entonces...
-      navigation.navigate("ForgotPassword")
-
-      // --> si todo mal
-      setErrorModalVisible(true)
-      setCode({campo:'',valido:null})
+      contraseñaService.validarCodigo(mail.campo,code.campo)
+        .then(()=>navigation.navigate("ForgotPassword",{mail:mail.campo,codigo:code.campo}))
+        .catch(error=>{
+          console.log(error)
+          setErrorModalVisible(true)
+          setCode({campo:'',valido:null})
+        })
     }else{
       setErrorModalVisible(true)
       setCode({campo:'',valido:null})

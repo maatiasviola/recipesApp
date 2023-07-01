@@ -13,6 +13,8 @@ import SignUp from './src/components/Authentication/SignUp';
 import SignIn from './src/components/Authentication/SignIn/SignIn';
 import ForgotPassword from './src/screens/ForgotPassword/ForgotPassword';
 import CodeVerification from './src/screens/SignUpCodeVerification/SignUpCodeVerification';
+import { UserContextProvider } from './src/Context/UserContext';
+import RecetasAIntentar from './src/screens/RecetasAIntentar/RecetasAIntentar';
 
 const Stack=createStackNavigator()
 const options={
@@ -59,47 +61,54 @@ export default function App() {
   
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-            headerShown: false
-        }}
-        initialRouteName={'Login'}
-      >
-        <Stack.Screen
-          name="Login"
-          component={Login}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignIn}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-        />
-        
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPassword}
-        />
-        <Stack.Screen
-          name="CodeVerification"
-          component={CodeVerification}
-        />
-        <Stack.Screen
-            name="Home"
-            component={Tabs}
-        />
-        <Stack.Screen 
-          name="RecipeListing"
-          component={RecipesListing}
-          options={()=>options}
-        />
-        <Stack.Screen 
-          name="RecipeDetails"
-          component={RecipeDetails}  
-        />
-      </Stack.Navigator>
+      <UserContextProvider>
+        <Stack.Navigator
+          screenOptions={{
+              headerShown: false
+          }}
+          initialRouteName={'Login'}
+        >
+          <Stack.Screen
+            name="Login"
+            component={Login}
+          />
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+          />
+          
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+          />
+          <Stack.Screen
+            name="CodeVerification"
+            component={CodeVerification}
+          />
+          <Stack.Screen
+              name="Home"
+              component={Tabs}
+          />
+          <Stack.Screen 
+            name="RecipeListing"
+            component={RecipesListing}
+            options={()=>options}
+          />
+          <Stack.Screen 
+            name="RecipeDetails"
+            component={RecipeDetails}  
+          />
+
+          <Stack.Screen 
+            name="RecetasIntentar"
+            component={RecetasAIntentar}  
+          />
+        </Stack.Navigator>
+      </UserContextProvider>
     </NavigationContainer>
   );
 }

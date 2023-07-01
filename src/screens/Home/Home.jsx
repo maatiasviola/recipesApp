@@ -2,8 +2,9 @@
 import styles from './styles'
 import { dummyData, SIZES,FONTS, COLORS } from "../../constants"
 
-// Hooks
+// Hooks & Services
 import { useEffect, useState } from "react"
+import recetasService from '../../Servicios/recetas'
 
 // Components
 import { FlatList,View,Text,TouchableOpacity, SafeAreaView } from "react-native"
@@ -22,11 +23,9 @@ const Home = ({navigation})=>{
   const [ultimasRecetas,setUltimasRecetas]=useState([])
 
   useEffect(()=>{
-    axios.get('http://localhost:8080/Recetas/Controller/ultimasTresRecetas')
-    .then(response => {
-      const ultimasRecetasResponse = response.data;
-      // console.log(ultimasRecetasResponse)
-      setUltimasRecetas(ultimasRecetasResponse)
+    recetasService.obtenerTresUltimasRecetas()
+    .then(response=>{
+      setUltimasRecetas(response)
     })
     .catch(error => {
       console.error(error);

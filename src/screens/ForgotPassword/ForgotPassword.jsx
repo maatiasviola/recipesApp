@@ -3,12 +3,13 @@ import styles from './styles'
 import { COLORS, FONTS, icons, images, SIZES } from "../../constants"
 import { expresiones } from "../../constants/expresiones"
 
-// Hooks
+// Hooks & Services
 import { useState } from "react"
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import contraseñaService from '../../Servicios/contraseña';
 
 // Components
-import { Text,View, StyleSheet,Image } from "react-native"
+import { Text,View,Image } from "react-native"
 import { Shadow } from "react-native-shadow-2"
 import StyledInput from "../../components/Authentication/StyledInput"
 import TextButton from "../../components/TextButton"
@@ -30,6 +31,9 @@ const ForgotPassword = () => {
   //Form
   const [password,setPassword] = useState({campo:"",valido:null})
   const [confirmPassword,setConfirmPassword] = useState({campo:"",valido:null})
+  
+  const route = useRoute();
+  const { mail,codigo } = route.params;
 
   // Valida contraseñas sean identicas
   const validarPassword2 = () =>{
@@ -60,10 +64,11 @@ const ForgotPassword = () => {
     }else{
       {/* Datos correctos */}
 
-      // hacer el post a bdd
-      
-      setExitoCambioContraseña(true)
-      setAlertModalVisible(true)
+      contraseñaService.cambiarContraseña(mail,password.campo,codigo)
+        .then(()=>{
+          setExitoCambioContraseña(true)
+          setAlertModalVisible(true)
+        })
     }
   }
 

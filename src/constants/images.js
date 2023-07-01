@@ -33,7 +33,15 @@ const camara = require('../assets/images/camara.png')
 const defaultUser = require('../assets/images/defaultuser.png')
 const defaultImage = require('../assets/images/defaultImage.png')
 
+// Filtros
+const incluyeIngredientes = require('../assets/icons/incluyeIngredientes.png')
+const excluyeIngredientes = require('../assets/icons/excluyeIngredientes.png')
+const autor = require('../assets/icons/autor.png')
+
 export default {
+    incluyeIngredientes,
+    excluyeIngredientes,
+    autor,
     defaultImage,
     galeria,
     camara,

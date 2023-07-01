@@ -6,6 +6,7 @@ import Settings from "../screens/Settings/Settings";
 import Search from "../screens/Search/Search";
 import RecipesListing from "../screens/RecipesListing/RecipesListing";
 import CreateRecipe from "../screens/CreateRecipe/CreateRecipe";
+import RecetasAIntentar from "../screens/RecetasAIntentar/RecetasAIntentar";
 
 const {Screen,Navigator} = createBottomTabNavigator()
 
@@ -54,7 +55,7 @@ const Tabs = ()=>{
       />
       <Screen 
         name='/Bookmark' 
-        component={Home}
+        component={RecetasAIntentar}
         options={{
           tabBarIcon:({focused})=><TabIcon focused={focused}
           icon={icons.bookmark}/>}}

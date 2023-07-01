@@ -1,0 +1,10 @@
+// Login {Mail, Contraseña}
+GET https://recetasfinal-master-production.up.railway.app/Recetas/Controller/getLogin/{Mail}/{Contraseña}
+
+######################
+
+// Obtener Usuarios
+
+GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/getAllUsuarios
+
+######################3

@@ -1,0 +1,32 @@
+// Recetas a intentar de un usuario {ID}
+
+GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/recetasIntentar/1
+
+###########################3
+
+// Recetas creadas por usuario
+
+GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/recetasCredas/1
+
+############################
+
+// Ultimas 3 recetas
+GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/ultimasTresRecetas
+
+###############################
+
+// Receta por id {ID}
+GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/getRecipe/1
+
+#################################################################
+
+//
+
+GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/getRecipe/mati
+
+##############
+
+// Recetas por categoria {idCategoria}
+GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/buscarCategoria/2
+
+################3

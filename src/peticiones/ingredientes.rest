@@ -1,0 +1,2 @@
+// Obtener ingredientes
+GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/getIngredientes
