@@ -21,6 +21,7 @@ function IngredientesInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
   useEffect(()=>{
     //obtener ingredientes
     //setIngredientes(response)
+    
   },[])
 
   return (
@@ -37,11 +38,12 @@ function IngredientesInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
         >
           <MultipleSelectList
             setSelected={(val) =>
-              setNuevaReceta({
-                ...nuevaReceta,
-                ingredientes: nuevaReceta.ingredientes.concat(val)
-              })
+              setNuevaReceta((prevReceta) => ({
+                ...prevReceta,
+                ingredientes: [...prevReceta.ingredientes, val]
+              }))
             }
+            
             data={ingredientes}
             label="Ingredientes"
             save="key" // id del objeto
@@ -50,11 +52,12 @@ function IngredientesInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
           />
         </View>
 
-        {nuevaReceta?.ingredientes?.map(ingrediente=>{
-          return(
-            <CardIngredienteSeleccionado key={ingrediente.id} setNuevaReceta={setNuevaReceta} nuevaReceta={nuevaReceta} ingrediente={ingrediente}/>
-          )
-        })}
+        {nuevaReceta?.ingredientes?.map(ingrediente => { 
+  return (
+    <CardIngredienteSeleccionado key={ingrediente.id+''} setNuevaReceta={setNuevaReceta} nuevaReceta={nuevaReceta} ingrediente={ingrediente} />
+  )
+})}
+
       
       
       {/* Button */}

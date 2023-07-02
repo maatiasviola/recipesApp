@@ -40,16 +40,16 @@ const ordenAlfabetico = [
   }
 ]
 
-const unidades = [
+export const unidades = [
   {
-    id:0,
-    unidad:'gramos'
+    id: 0,
+    unidad: 'gramos'
   },
   {
-    id:1,
-    unidad:'cucharadas'
-  },
-]
+    id: 1,
+    unidad: 'cucharadas'
+  }
+];
 
 export default {
   ordenAlfabetico,

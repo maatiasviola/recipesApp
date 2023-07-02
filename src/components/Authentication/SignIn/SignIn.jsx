@@ -7,6 +7,11 @@ import { useState, useEffect } from "react"
 import { useNavigation } from '@react-navigation/native';
 import userService from '../../../Servicios/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 // Components
 import { TouchableOpacity, Text, View, Image, CheckBox } from "react-native"
 import { Shadow } from "react-native-shadow-2"
@@ -19,6 +24,7 @@ import { useContext } from 'react';
 import UserContext from '../../../Context/UserContext'
 const SignIn = () => {
   const { setUser } = useContext(UserContext);
+<<<<<<< Updated upstream
   // modal error credenciales invalidas
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [leyendaErrorCorreoRecupero, setLeyendaErrorCorreoRecupero] = useState("El correo solo puede contener letras, números, puntos, guiones y guion bajo.");
@@ -27,11 +33,31 @@ const SignIn = () => {
   const [emailRequest, setEmailRequest] = useState({ campo: "", valido: null });
   // contraseña visible
   const [isVisible, setIsVisible] = useState(false);
+=======
+
+  // modal error credenciales invalidas
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [leyendaErrorCorreoRecupero, setLeyendaErrorCorreoRecupero] = useState("El correo solo puede contener letras, números, puntos, guiones y guion bajo.");
+
+  // modal y estado cambio de contraseña
+  const [requestModalVisible, setRequestModalVisible] = useState(false);
+  const [emailRequest, setEmailRequest] = useState({ campo: "", valido: null });
+
+  // contraseña visible
+  const [isVisible, setIsVisible] = useState(false);
+
+>>>>>>> Stashed changes
   // form
   const [email, setEmail] = useState({ campo: "", valido: null });
   const [password, setPassword] = useState({ campo: "", valido: null });
   const [rememberPassword, setRememberPassword] = useState(false);
+<<<<<<< Updated upstream
   const navigation = useNavigation(); // navegar entre pantallas
+=======
+
+  const navigation = useNavigation(); // navegar entre pantallas
+
+>>>>>>> Stashed changes
   const handlePressLogin = () => {
     if (email.valido === 'true' && password.valido === 'true') {
       userService.login(email.campo, password.campo)
@@ -50,6 +76,10 @@ const SignIn = () => {
       setPassword({ campo: '', valido: null })
     }
   };
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   /* Enviar código cambio de contraseña */
   const handlePressSendCode = () => {
     if (emailRequest.valido === 'true') {
@@ -60,15 +90,27 @@ const SignIn = () => {
       setLeyendaErrorCorreoRecupero("Correo mal ingresado")
     }
   };
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   useEffect(() => {
     // Recuperar datos de sesión almacenados si la opción de recordar contraseña está activada
     retrieveSessionData();
   }, []);
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   const retrieveSessionData = async () => {
     try {
       const storedUsername = await AsyncStorage.getItem('username');
       const storedPassword = await AsyncStorage.getItem('password');
       const storedRememberPassword = await AsyncStorage.getItem('rememberPassword');
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
       if (storedRememberPassword === 'true') {
         setEmail({ campo: storedUsername, valido: 'true' });
         setPassword({ campo: storedPassword, valido: 'true' });
@@ -78,6 +120,10 @@ const SignIn = () => {
       console.log('Error retrieving session data:', error);
     }
   };
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   const saveSessionData = async () => {
     console.log("Contraseña guardada")
     try {
@@ -89,9 +135,17 @@ const SignIn = () => {
       console.log('Error saving session data:', error);
     }
   };
+<<<<<<< Updated upstream
   const handleToggleRememberPassword = () => {
     setRememberPassword(!rememberPassword);
   };
+=======
+
+  const handleToggleRememberPassword = () => {
+    setRememberPassword(!rememberPassword);
+  };
+
+>>>>>>> Stashed changes
   return (
     <>
       {/* Modal Error Credenciales Incorrectas */}
@@ -130,6 +184,10 @@ const SignIn = () => {
           }}
         />
       </ModalPopUp>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
       {/* Container */}
       <View style={styles.bigContainer}>
         {/* Logo */}
@@ -142,6 +200,10 @@ const SignIn = () => {
         <View style={styles.container}>
           <Shadow>
             <View style={styles.authContainer}>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
               {/* Title */}
               <Text style={styles.containerTitle}>
                 Inicia sesión para continuar
@@ -181,6 +243,10 @@ const SignIn = () => {
                   />
                 }
               />
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
               {/* Remember Password */}
               <View style={styles.rememberPasswordContainer}>
                     <CheckBox
@@ -192,6 +258,10 @@ const SignIn = () => {
                                  Recordar contraseña
                                     </Text>
                            </View>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
               {/* Forgot password ? */}
               <TouchableOpacity
                 onPress={() => setRequestModalVisible(true)}
@@ -209,6 +279,10 @@ const SignIn = () => {
               />
             </View>
           </Shadow>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
           {/* Dont have account ? */}
           <View style={styles.signUpContainer}>
             <Text style={styles.signUpTitle}>¿No tienes una cuenta?</Text>
@@ -226,4 +300,9 @@ const SignIn = () => {
     </>
   );
 };
+<<<<<<< Updated upstream
 export default SignIn;
+=======
+
+export default SignIn;
+>>>>>>> Stashed changes
