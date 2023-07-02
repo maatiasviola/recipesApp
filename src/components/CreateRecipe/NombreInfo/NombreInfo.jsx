@@ -10,36 +10,18 @@ import TextButton from '../../TextButton'
 import { useContext } from 'react'
 import UserContext from '../../../Context/UserContext'
 import recetasService from '../../../Servicios/recetas'
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 function NombreInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
   const [recetaExistenteModalVisible,setRecetaExistenteModalVisible] = useState(false)
   const {user} = useContext(UserContext)
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
   const handleSubmit = () =>{
     // verificar si tiene una receta que ya tiene ese nombre
     // si ya hay una receta con ese nombre
     //setRecetaExistenteModalVisible(true)
-<<<<<<< Updated upstream
-   
-    // si no hay receta existente
-    recetasService.validarNombreReceta(nuevaReceta,user.idUsuario)
-      .then(response => {
-        console.log(response)
-        setPagina(pagina+1)
-      })
-      .catch(error=> {
-        console.log(error)
-        setRecetaExistenteModalVisible(true)
-=======
     
     // si no hay receta existente
-    recetasService.validarNombreReceta(nuevaReceta,user.idUsuario)
+    recetasService.validarNombreReceta(nuevaReceta.nombre,user.idUsuario)
       .then(response => {
         setPagina(pagina+1)
       }) 
@@ -47,7 +29,6 @@ function NombreInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
         console.log(error)
         setRecetaExistenteModalVisible(true)
       
->>>>>>> Stashed changes
       })
   }
   const handleModalClickReemplazar = () =>{

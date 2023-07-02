@@ -3,7 +3,6 @@ const URL ="http://recetasfinal-master-production.up.railway.app/Recetas/Control
 
 const obtenerTresUltimasRecetas = async()=>{
   const {data} = await axios.get(`${URL}/ultimasTresRecetas`)
-<<<<<<< Updated upstream
   return data
 }
 
@@ -46,9 +45,7 @@ const guardarEliminarReceta = async (idUsuario,idReceta) =>{
 const conocerRecetaGuardadaPorUsuario = async(idUsuario,idReceta)=>{
   const {data} = await axios.post(`${URL}/getUsuarioGuardoReceta/${idUsuario}/${idReceta}`)
   console.log("Servicio conocer si usuario guardo receta devuelve: ",data)
-=======
   console.log("TRES RECETAS: ",data)
->>>>>>> Stashed changes
   return data
 }
 
@@ -70,15 +67,9 @@ const modificarRecetaCantidadPorciones = async(idReceta,cantidad) =>{
   return data
 }
 
-const validarNombreReceta = async(NombreReceta,idUsuario) =>{
-  const {data} = await axios.get(`${URL}/validarNombre/${NombreReceta.nombre}/${idUsuario}`)
-  return data
-}
-
 export default {
   obtenerTresUltimasRecetas,
   obtenerRecetasIntentar,
-<<<<<<< Updated upstream
   valorarReceta,
   validarNombreReceta,
   multiplicarReceta,
@@ -88,7 +79,4 @@ export default {
   conocerRecetaGuardadaPorUsuario,
   modificarRecetaCantidadPersonas,
   modificarRecetaCantidadPorciones
-=======
-  validarNombreReceta
->>>>>>> Stashed changes
 }
