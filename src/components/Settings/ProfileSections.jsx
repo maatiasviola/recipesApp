@@ -3,34 +3,38 @@ import { COLORS, icons, SIZES } from "../../constants"
 import dummyData from '../../constants/dummyData'
 import ProfileValue from "./ProfileValue"
 import LineDivider from '../LineDivider'
+import { useContext } from "react"
+import UserContext from "../../Context/UserContext"
+import { useNavigation } from "@react-navigation/native"
 
-//Obtengo usuario hardcodeado
-const dummy_profile=dummyData.trendingRecipes[0].author
+
 
 //Seccion configuracion con Nombre, Email y Password
 export const ProfileSection1 = ()=>{
+  const {user} = useContext(UserContext)
+  
   return(
     <View style={styles.profileSectionContainer}>
       <ProfileValue
         icon={icons.profile}
-        label='Name'
-        value={dummy_profile.name}
+        label='Nombre'
+        value={user.nombre}
       />
 
       <LineDivider/>
 
       <ProfileValue
         icon={icons.email}
-        label='E-mail'
-        value='matiasviola02@gmail.com'
+        label='Mail'
+        value={user.mail}
       />
 
       <LineDivider/>
 
       <ProfileValue
         icon={icons.password}
-        label='Password'
-        value='Updated 2 weeks ago'
+        label='Contraseña'
+        value='Presiona para actualizar'
       />
 
       <LineDivider/>
@@ -40,11 +44,15 @@ export const ProfileSection1 = ()=>{
 
 //Seccion configuracion con Cerrar Sesion
 export const ProfileSection2 = ()=>{
+  const navigation = useNavigation()
   return(
     <View style={styles.profileSectionContainer}>
       <ProfileValue
         icon={icons.cerrarSesion}
         value='Cerrar sesión'
+        onPress={()=>{
+          navigation.navigate("Login")
+        }}
       />
     </View>
   )

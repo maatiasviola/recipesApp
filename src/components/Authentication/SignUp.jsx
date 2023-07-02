@@ -1,16 +1,16 @@
 import "setimmediate"
-import { useEffect, useState,useRef } from "react"
+import { useState } from "react"
 import { Text,View,StyleSheet,TouchableOpacity,Image } from "react-native"
 import { COLORS, FONTS, icons, images, SIZES } from "../../constants"
 import IconButton from "../IconButton"
 import TextButton from "../TextButton"
 import StyledInput from "./StyledInput"
 import { useNavigation } from '@react-navigation/native';
-import axios from 'axios'
 import {expresiones} from '../../constants/expresiones'
 import AlertMessage from "../AlertMessage"
 import ModalPopUp from "../ModalPopUp"
 import * as ImagePicker from 'expo-image-picker';
+import userService from '../../Servicios/user'
 
 const SignUp = ()=>{
   const navigation = useNavigation();
@@ -53,58 +53,47 @@ const SignUp = ()=>{
     }    
     else{
       {/* Si campos CORRECTOS */}
-      // Realizar el post a la BDD
-
-      {/* Si ALIAS en uso */}
-      //setMensaje("Alias ya utilizado, proba con estos:")
-      //setTipoMensaje("Warning")
-      //setAliasRecomendados(aliasResponse)
-
-      {/* Si correo en uso -> opcion recuperar contraseña */}
-      //setModalRecuperarContraseñaVisible(true) 
+      userService.validarRegistro(email.campo,alias.campo)
+        .then(response=>{
+          console.log("Id Usuario: ",response)
+          setidUsuario(response)
+          setValidated(true)
+        })
+        .catch(error=>{
+          console.log("ERROR: ",error)
+          if (error.response.status === 422 && error.response.data === 'EMail ya existe') {
+            setMensaje(error.response.data);
+            setModalRecuperarContraseñaVisible(true) 
+          } else if (error.response.status === 422) {
+            //  email correcto pero alias existente
+            setTipoMensaje("Warning")
+            setAliasRecomendados(error.response)
+            set
+          } else {
+            // registro fallido
+            setMensaje('Por favor, revise la información ingresada');
+          }
+        })
 
       {/* Si correo no completo el registro */}
       //setModalErrorVisible(true)
-
-      {/* Si todo correcto -> continuar con el registro */}
-      setValidated(true)
-      //setidUsuario(responseIdUsuario)
     }
-    
-    {/* 
-    axios.post('http://localhost:8080/Recetas/Controller/signUp1?email='+email+'&alias='+alias)
-      .then(response => {
-        // Aquí puedes manejar la respuesta de la API, que debe ser el objeto de usuario
-        const user = response.data;
-        console.log(user); // Puedes mostrarlo en la consola o guardarlo en el estado de tu componente
-        setidUsuario(user)
-        setValidated(true)
-
-      })
-      .catch(error => {
-        // Manejar errores de la solicitud o del servidor
-        setMessage('Hola')
-      });
-      */}
     }
 
     const handleCreate = () => {
-
-      axios.put('http://localhost:8080/Recetas/Controller/signUp2?idUsuario='+idUsuario+'&nombre='+nombre+'&contrasena='+password)
-        .then(response => {
-          // Aquí puedes manejar la respuesta de la API, que debe ser el objeto de usuario
-          const user = response.data;
-          console.log(user); // Puedes mostrarlo en la consola o guardarlo en el estado de tu componente
-          navigation.navigate("SignIn")
-  
-        })
-        .catch(error => {
-          // Manejar errores de la solicitud o del servidor
-          setMensaje('no creado')
-        });
+      const nuevoUsuario = {
+        idUsuario:idUsuario,
+        nombre:nombre.campo,
+        contrasena:password.campo,
+        fotoPerfil:avatar
       }
-
-      
+      userService.confirmarRegistro(nuevoUsuario)
+        .then(response=>{
+          console.log(response)
+          navigation.navigate("SignIn")
+        })
+        .catch(error=>console.log(error))
+      }
 
   const handlePressRecuperarContraseña=()=>{
     //setRequestModalVisible(false)

@@ -7,7 +7,10 @@ import { ProfileSection1,ProfileSection2 } from "../../components/Settings/Profi
 import ProfileCard from "../../components/Settings/ProfileCard"
 import SettingsHeader from "../../components/Settings/SettingsHeader"
 
+// Context
+
 const Settings = () => {
+
   return(
     <View style={styles.container}>
       

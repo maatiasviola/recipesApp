@@ -1,60 +1,90 @@
 // CSS & Constants
 import styles from './styles'
-import { FONTS, icons, SIZES } from "../../../constants"
-import dummyData from '../../../constants/dummyData'
+import { COLORS, FONTS, icons, images, SIZES } from "../../../constants"
 
 // Services
-import recetasService from '../../../Servicios/recetas'
+import recetasDispositivoService from '../../../Servicios/recetasDispositivo'
 
 // Components
 import { Image, Text, View } from "react-native"
 import LineDivider from "../../../components/LineDivider"
 import RecipeStepCard from "../../../components/RecipeStepCard"
 import TextButton from "../../../components/TextButton"
-import { FloatingAction } from 'react-native-floating-action'
+import { useEffect, useState } from 'react'
+import { useNavigation } from '@react-navigation/native';
+import IconButton from '../../../components/IconButton'
+import ModalPopUp from '../../../components/ModalPopUp'
+import CarouselImagenes from '../../../components/CarouselImagenes'
 
 const RecipeSteps = ({selectedRecipe}) =>{
-  const acciones = [
-    {
-      text: 'Valorar Receta',
-      icon: icons.valorar,
-      name: 'Valorar',
-      position: 1
-    },
-    {
-      text: 'Guardar Receta',
-      icon: icons.guardar,
-      name: 'Guardar',
-      position: 2
-    }
-  ];
+  const navigation = useNavigation();
+
+  const [recetaGuardadaDispositivo,setRecetaGuardadaDispositivo] = useState(false)
+
+  const [selectedStep,setSelectedStep] = useState(null)
+  const [stepModalVisible,setStepModalVisible] = useState(false)
+
+  useEffect(()=>{
+    recetasDispositivoService.chequearRecetaExiste(selectedRecipe.idReceta)
+      .then(response=>{
+        //console.log(response)
+        if(response==true){
+          setRecetaGuardadaDispositivo(true)
+        }else{
+          setRecetaGuardadaDispositivo(false)
+        }
+      })
+      .catch(error=>console.log(error))
+  },[])
+
+  const handleGuardarReceta = () =>{
+    recetasDispositivoService.guardarRecetaDispositivo(selectedRecipe)
+      .then(()=>{
+        //console.log("Receta guardada con exito!")
+        setRecetaGuardadaDispositivo(true)
+      })
+      .catch(error=>console.log(error))
+  }
+
+  const handleEliminarReceta = () =>{
+    recetasDispositivoService.eliminarReceta(selectedRecipe.idReceta)
+      .then(response=>{
+        //console.log(response)
+        setRecetaGuardadaDispositivo(false)
+      })
+      .catch(error=>console.log(error))
+  }
+
   return(
     <>
-      <FloatingAction
-        actions={acciones}
-        onPressItem={(name) => {
-          if (name === 'Valorar') {
-            navigation.navigate('ValorarReceta',{receta:selectedRecipe})
-          }else if(name === 'Guardar'){
-            recetasService.guardarRecetaDispositivo(selectedRecipe)
-              .then(response=>{
-                console.log(response)
-                console.log("Receta guardada con exito")
-              })
-              .catch(error=>console.log(error))
-          }
-        }}
-      />
       <View style={styles.container}>
-        
+      <ModalPopUp
+        visible={stepModalVisible} 
+        setVisible={setStepModalVisible}
+        titulo={selectedStep?.texto}  
+      >
+        <CarouselImagenes images={selectedStep?.multimedias}/>
+      </ModalPopUp>
         {/* Header */}
         <View style={styles.header}>
           
           {/*Title */}
-          <Text style={styles.headerTitle}>
-            {selectedRecipe?.name}
-          </Text>
-          
+          <View style={styles.headerInfo}>
+            <Text style={styles.headerTitle}>
+              {selectedRecipe?.descripcion}
+            </Text>
+            <IconButton
+            icon={recetaGuardadaDispositivo ? icons.desguardar : icons.guardar}
+            iconStyle={{tintColor:COLORS.black}}
+            containerStyle={{
+              width:50,
+              height:50,
+              alignItems:'center',
+              justifyContent:'center'
+            }}
+            onPress={recetaGuardadaDispositivo ? handleEliminarReceta: handleGuardarReceta}
+          />
+          </View>
           {/* Info */}
           <View style={styles.headerInfo}>
             <View 
@@ -68,17 +98,17 @@ const RecipeSteps = ({selectedRecipe}) =>{
                 style={styles.headerInfoIcon}
               />
               <Text style={styles.headerInfoText}>
-                {selectedRecipe?.serving} Servings
+                {selectedRecipe?.porciones} Porciones
               </Text>
             </View>
             
             <View style={styles.headerInfoIconContainer}>
               <Image 
-                source={icons.time} 
+                source={images.incluyeIngredientes} 
                 style={styles.headerInfoIcon}
               />
               <Text style={styles.headerInfoText}>
-                {selectedRecipe?.duration}
+                {selectedRecipe?.tipo.descripcion}
               </Text>
             </View>
           </View>
@@ -86,14 +116,14 @@ const RecipeSteps = ({selectedRecipe}) =>{
           {/* Chef card */}
           <View style={styles.chefCardContainer}>
             <Image 
-              source={selectedRecipe?.author.profilePic}
+              source={selectedRecipe?.fotoUsuario || images.defaultUser}
               style={styles.chefPhoto}
             />
 
             {/* Nombre Autor */}
             <View style={styles.authorContainer}>
               <Text style={styles.authorName}>
-                {selectedRecipe?.author.name}
+                {selectedRecipe?.nombreUsuario}
               </Text>
             </View>
             <TextButton
@@ -120,8 +150,12 @@ const RecipeSteps = ({selectedRecipe}) =>{
 
         {/* Steps */}
         <View>
-          {dummyData?.recipe_details?.videos
-            .map((item,index)=><RecipeStepCard step={item} key={index}/>)
+          {selectedRecipe?.pasos
+            .map((item,index)=><RecipeStepCard 
+                                setSelectedStep={setSelectedStep} 
+                                setStepModalVisible={setStepModalVisible}
+                                step={item} 
+                                key={index}/>)
           }
         </View>
       </View>

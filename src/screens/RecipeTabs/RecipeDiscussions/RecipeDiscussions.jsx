@@ -2,8 +2,12 @@
 import styles from './styles'
 import { COLORS, dummyData, FONTS, icons, SIZES } from "../../../constants"
 
-// Hooks 
-import { useEffect, useState } from "react"
+// Hooks & Services
+import { useContext, useEffect, useState } from "react"
+import comentariosService from '../../../Servicios/comentarios'
+
+// Context
+import UserContext from '../../../Context/UserContext'
 
 // Components
 import { FlatList, Text, View,TextInput, Keyboard } from "react-native"
@@ -12,7 +16,6 @@ import IconButton from "../../../components/IconButton"
 import IconLabelButton from "../../../components/IconLabelButton"
 
 const RecipeDiscussions= ({selectedRecipe,setSelectedRecipe})=>{
-  
   const [nuevoComentario,setNuevoComentario] = useState("")
 
   // Posicionamiento del footer
@@ -39,106 +42,71 @@ const RecipeDiscussions= ({selectedRecipe,setSelectedRecipe})=>{
       hideSubscription.remove()
     }
   },[])
+
+  const {user} = useContext(UserContext)
   
   const handleSend = () =>{
-    // enviar nuevo comentario a la bdd
-    console.log("Nuevo comentario:",nuevoComentario)
-
-    {/* Si todo sale bien, la linea se va a parecer a la que esta abajo */}
-    //setSelectedRecipe({...selectedRecipe,comentarios:selectedRecipe.comentarios.concat(returnedComment)})
-    setNuevoComentario("")
+    comentariosService.insertarComentario(user.idUsuario,selectedRecipe.idReceta,nuevoComentario)
+      .then(response=>{
+        setSelectedRecipe({...selectedRecipe,comentarios:selectedRecipe.comentarios.concat(response)})
+        setNuevoComentario("")
+      })
   }
 
   return(
     <View style={styles.container}>
-      
-      {/* Discussions */}
-      <View style={{flex:1}}>
-        <FlatList
-          data={dummyData?.recipe_details?.discussions} // reemplazar selectedRecipe
-          keyExtractor={item=>item.id}
-          contentContainerStyle={{
-            paddingHorizontal:SIZES.padding,
-            paddingBottom:70
-          }}
-          renderItem={({item,index})=>(
-            <CommentSection 
-              commentItem={item}
-              commentOption={
-                <View style={styles.commentOptionContainer}>
-                  
-                  {/* N° comments */}
-                  <IconLabelButton
-                    label={item?.no_of_comments}
-                    icon={icons.comment}
-                    iconStyle={{
-                      tintColor:COLORS.black
-                    }}
-                    labelStyle={styles.likesCommentsLabelStyle}
+      {
+        selectedRecipe.calificaciones.lenght ===0
+          ? (
+            <View style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+              <Text>Sé el primero en comentar</Text>
+            </View>
+          ) : (
+            <>
+              {/* Discussions */}
+              <View style={{flex:1}}>
+              <FlatList
+                data={selectedRecipe?.calificaciones}
+                keyExtractor={item=>item.id}
+                contentContainerStyle={{
+                  paddingHorizontal:SIZES.padding,
+                  paddingBottom:70
+                }}
+                renderItem={({item,index})=>(
+                  <CommentSection 
+                    commentItem={item}
+                    commentOption={
+                      <View style={styles.commentOptionContainer}>
+                        
+                        {/* N° comments */}
+                        <IconLabelButton
+                          label={2}
+                          icon={icons.comment}
+                          iconStyle={{
+                            tintColor:COLORS.black
+                          }}
+                          labelStyle={styles.likesCommentsLabelStyle}
+                        />
+
+                        {/* N° likes */}
+                        <IconLabelButton
+                          containerStyle={{
+                            marginLeft:SIZES.radius
+                          }}
+                          label={20}
+                          icon={icons.heart}          
+                          labelStyle={styles.likesCommentsLabelStyle}
+                        />
+
+                      </View>
+                    }  
                   />
-
-                  {/* N° likes */}
-                  <IconLabelButton
-                    containerStyle={{
-                      marginLeft:SIZES.radius
-                    }}
-                    label={item?.no_of_likes}
-                    icon={icons.heart}          
-                    labelStyle={styles.likesCommentsLabelStyle}
-                  />
-
-                  {/* Date posted */}
-                  <Text style={styles.datePostedText}>
-                    {item?.posted_on}
-                  </Text>
-                </View>
-              }
-              commentReplies={
-                <FlatList
-                  data={item?.replies}
-                  scrollEnabled={false}
-                  keyExtractor={item=>item.id}
-                  renderItem={({item,index})=>(
-                    <CommentSection 
-                      commentItem={item}
-                      commentOption={
-                        <View style={styles.commentRepliesContainer}>
-                          
-                          {/* Reply */}
-                          <IconLabelButton
-                            icon={icons.reply}
-                            label="Reply"
-                            labelStyle={{
-                              marginLeft:5,
-                              color:COLORS.black,
-                              ...FONTS.h4
-                            }}
-                          />
-
-                          {/* Like */}
-                          <IconLabelButton
-                            icon={icons.heart_off}
-                            label="Like"
-                            containerStyle={{
-                              marginLeft:SIZES.radius
-                            }}
-                            labelStyle={styles.likesCommentsLabelStyle}
-                          />
-
-                          {/* Date */}
-                          <Text style={styles.datePostedText}>
-                            {item?.posted_on}
-                          </Text>
-                        </View>
-                      }  
-                    />
-                  )}
-                />
-              }  
-            />
-          )}
-        />
-      </View>
+                )}
+              />
+            </View>
+          </>
+        )
+      }
 
       {/* Footer */}
       <View 
@@ -155,7 +123,7 @@ const RecipeDiscussions= ({selectedRecipe,setSelectedRecipe})=>{
         }}
       >
         <TextInput
-          placeholder="¿Que estás pensando?"
+          placeholder="¿Que opinas de la receta?"
           style={styles.footerInput}
           multiline
           value={nuevoComentario}

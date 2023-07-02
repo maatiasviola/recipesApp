@@ -7,7 +7,7 @@ import IconButton from "../IconButton"
 const SettingsHeader = ()=>{
   return(
     <View style={styles.header}>
-      <Text style={{...FONTS.h1}}>Profile</Text>
+      <Text style={{...FONTS.h1}}>Perfil</Text>
       <IconButton 
         icon={icons.sun} 
         iconStyle={{tintColor:COLORS.black}}

@@ -1,8 +1,7 @@
-import { View,Image,Text,FlatList } from "react-native"
-import { COLORS, FONTS, icons, SIZES } from "../constants"
-import IconLabelButton from "./IconLabelButton"
+import { View,Image,Text } from "react-native"
+import { FONTS, images, SIZES } from "../constants"
 
-const CommentSection = ({commentItem, commentOption, commentReplies}) =>{
+const CommentSection = ({commentItem, commentOption}) =>{
   return(
     <View
       style={{
@@ -12,7 +11,7 @@ const CommentSection = ({commentItem, commentOption, commentReplies}) =>{
     >
       {/* Profile Photo */}
       <Image 
-        source={commentItem?.profile}
+        source={commentItem?.usuario.avatar || images.defaultUser}
         style={{
           width:40,
           height:40,
@@ -29,16 +28,13 @@ const CommentSection = ({commentItem, commentOption, commentReplies}) =>{
         }}
       >
         {/* Name */}
-        <Text style={{...FONTS.h3}}>{commentItem?.name}</Text>
+        <Text style={{...FONTS.h3}}>{commentItem?.usuario.nickname}</Text>
         
         {/* Comment */}
-        <Text style={{...FONTS.body4}}>{commentItem?.comment}</Text>
+        <Text style={{...FONTS.body4}}>{commentItem?.comentarios}</Text>
 
         {/* Comment Options */}
         {commentOption}
-
-        {/* Replies Section */}
-        {commentReplies}
       </View>
     </View>
   )

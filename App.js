@@ -16,6 +16,7 @@ import CodeVerification from './src/screens/SignUpCodeVerification/SignUpCodeVer
 import { UserContextProvider } from './src/Context/UserContext';
 import RecetasAIntentar from './src/screens/RecetasAIntentar/RecetasAIntentar';
 import ValorarReceta from './src/screens/ValorarReceta/ValorarReceta';
+import RecetasEditadas from './src/screens/RecetasEditadas/RecetasEditadas';
 
 const Stack=createStackNavigator()
 const options={
@@ -112,6 +113,10 @@ export default function App() {
           <Stack.Screen 
             name="RecetasIntentar"
             component={RecetasAIntentar}  
+          />
+          <Stack.Screen 
+            name="RecetasEditadas"
+            component={RecetasEditadas}  
           />
         </Stack.Navigator>
       </UserContextProvider>

@@ -30,3 +30,4 @@ GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/getR
 GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/buscarCategoria/2
 
 ################3
+GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/getValoracionUsuarioReceta/17/3

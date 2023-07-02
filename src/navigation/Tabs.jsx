@@ -7,6 +7,7 @@ import Search from "../screens/Search/Search";
 import RecipesListing from "../screens/RecipesListing/RecipesListing";
 import CreateRecipe from "../screens/CreateRecipe/CreateRecipe";
 import RecetasAIntentar from "../screens/RecetasAIntentar/RecetasAIntentar";
+import RecetasEditadas from "../screens/RecetasEditadas/RecetasEditadas";
 
 const {Screen,Navigator} = createBottomTabNavigator()
 
@@ -62,7 +63,7 @@ const Tabs = ()=>{
       />
       <Screen 
         name='/Editadas' 
-        component={CreateRecipe}
+        component={RecetasEditadas}
         options={{
           tabBarIcon:({focused})=><TabIcon focused={focused}
           icon={icons.editar}/>}}

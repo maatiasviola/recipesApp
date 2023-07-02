@@ -1,8 +1,14 @@
-import { View,Image,Text } from "react-native"
+import { View,Image,Text, TouchableOpacity } from "react-native"
 import { COLORS, FONTS, icons, SIZES } from "../constants"
 
-const RecipeStepCard = ({step})=>{
+const RecipeStepCard = ({step,setSelectedStep,setStepModalVisible})=>{
+  const handleChangeSelectedStep = () =>{
+    setSelectedStep(step)
+    console.log("Paso Seleccionado: ",step)
+    setStepModalVisible(true)
+  }
   return(
+    <TouchableOpacity onPress={handleChangeSelectedStep}>
     <View
       style={{
         flexDirection:'row',
@@ -13,8 +19,7 @@ const RecipeStepCard = ({step})=>{
     >
       {/* Status */}
       <Image 
-        source={step?.is_complete?
-        icons.completed : step?.is_playing ? icons.play_1 : icons.lock}
+        source={step?.multimedias[0]}
         style={{
           width:40,
           height:40
@@ -33,43 +38,12 @@ const RecipeStepCard = ({step})=>{
             ...FONTS.h3
           }}
         > 
-          {step?.title}
+          {step?.nroPaso}. {step?.texto}
         </Text>
-        <Text
-          style={{
-            ...FONTS.body4,
-            color:COLORS.gray30
-          }}
-        >
-          {step?.duration}
-        </Text>
-      </View>
-
-      {/* Download */}
-      <View
-        style={{
-          flexDirection:'row'
-        }}
-      >
-        <Text 
-          style={{
-            ...FONTS.body4,
-            color:COLORS.gray30
-          }}
-        >
-          {step?.size}
-        </Text>
-        <Image 
-          source={icons.download}
-          style={{
-            width:25,
-            height:25,
-            marginLeft:SIZES.base
-          }}  
-        />
       </View>
 
     </View>
+    </TouchableOpacity>
   )
 }
 

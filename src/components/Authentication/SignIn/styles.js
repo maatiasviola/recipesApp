@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native"
-import { COLORS, SIZES,FONTS } from "../../../constants"
-
+import { COLORS, SIZES, FONTS } from "../../../constants"
 const styles = StyleSheet.create({
   bigContainer:{
     flex:1,
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems:'center',
     display:'flex',
-    flexDirection:'row', 
+    flexDirection:'row',
     justifyContent:'space-between',
     textAlign:'center'
   },
@@ -77,7 +76,7 @@ const styles = StyleSheet.create({
     marginLeft:2
   },
   signUpSubtitle:{
-    ...FONTS.body4, 
+    ...FONTS.body4,
     color:COLORS.primary
   },
   sendCodeButton:{
@@ -85,7 +84,36 @@ const styles = StyleSheet.create({
     borderRadius:SIZES.radius,
     backgroundColor:COLORS.primary,
     marginTop:20
+  },
+  rememberPasswordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: SIZES.radius
+  },
+  rememberPasswordToggle: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: COLORS.gray20,
+    borderRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: SIZES.base
+  },
+  rememberPasswordUnselected: {
+    width: 10,
+    height: 10,
+    borderRadius: 3,
+    backgroundColor: COLORS.transparent
+  },
+  rememberPasswordIcon: {
+    width: 15,
+    height: 15,
+    tintColor: COLORS.white
+  },
+  rememberPasswordText: {
+    ...FONTS.body4,
+    color: COLORS.gray30
   }
 })
-
-export default styles
+export default styles;

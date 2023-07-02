@@ -1,13 +1,16 @@
 import { StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
-import { COLORS, FONTS, icons, SIZES } from '../../constants'
+import { COLORS, FONTS, icons, images, SIZES } from '../../constants'
 import dummyData from '../../constants/dummyData'
+import { useContext } from 'react'
+
+// Context
+import UserContext from '../../Context/UserContext'
 
 //Tarjeta de usuario (foto,nombre,info y boton para volverse miembro)
 
-//Obtengo usuario hardcodeado
-const dummy_profile=dummyData.trendingRecipes[0].author
-
 const ProfileCard = ()=>{
+  const {user} = useContext(UserContext)
+
   return(
     <View style={styles.container}>
       
@@ -19,7 +22,7 @@ const ProfileCard = ()=>{
         }}
       >
         <Image 
-          source={dummy_profile.profilePic} 
+          source={user.avatar || images.defaultUser} 
           style={styles.profileImage}
         />
 
@@ -49,7 +52,7 @@ const ProfileCard = ()=>{
 
       {/* Details Section */}
       <View style={styles.infoContainer}>
-        <Text style={{...FONTS.h2, color:COLORS.white}}>{dummy_profile.name}</Text>
+        <Text style={{...FONTS.h2, color:COLORS.white}}>{user.nombre}</Text>
         <Text style={{...FONTS.body4,color:COLORS.white}}>Más información</Text>
         
         {/* Become Member Button */}

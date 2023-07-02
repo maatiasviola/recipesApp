@@ -9,6 +9,8 @@ import filtros from '../constants/constants'
 import ModalPopUp from './ModalPopUp'
 import { StyleSheet } from 'react-native'
 import TextButton from './TextButton'
+import { useEffect } from 'react'
+import ingredientesService from '../Servicios/ingredientes'
 
 const ClassTypeOption = ({containerStyle,classType, isSelected,onPress})=>{
   return(
@@ -66,6 +68,12 @@ const FilterModal=() =>{
   // servicios
   const [ingredientes,setIngredientes] = useState([])
   const [usuarios,setUsuarios] = useState(null) 
+
+  useEffect(()=>{
+    ingredientesService.obtenerIngredientes()
+      .then(response=>setIngredientes(response))
+      .catch(error=>console.log(error))
+  },[])
 
   const handleChangeFiltroEspecial = (id) => {
     setSelectedFiltroEspecial(id);
@@ -160,7 +168,8 @@ const FilterModal=() =>{
         contentContainerStyle={{
           paddingHorizontal:SIZES.padding,
           display:'flex',
-          gap:2
+          justifyContent:'space-between',
+          gap:5
         }}
       >
         {/* Filtros Especiales */}
@@ -223,11 +232,10 @@ const FilterModal=() =>{
             }}
           >
             {filtros.fechaCarga.map((item,index)=>{
-              console.log(item)
               return(
                 <TextButton
                   key={index}
-                  label={item?.label}
+                  value={item.label}
                   contentContainerStyle={{
                     height:45,
                     paddingHorizontal:SIZES.radius,
@@ -236,10 +244,10 @@ const FilterModal=() =>{
                     borderWidth:1,
                     borderRadius:SIZES.radius,
                     borderColor:COLORS.gray20,
-                    backgroundColor:item?.id == selectedMasAntigua ? COLORS.primary3 : null
+                    backgroundColor:item?.id == selectedMasAntigua ? COLORS.lightGreen : COLORS.transparentGray
                   }}
                   labelStyle={{
-                    color:item?.id == selectedMasAntigua ? COLORS.white : COLORS.black,
+                    color:item?.id == selectedMasAntigua ? COLORS.black : COLORS.white,
                     ...FONTS.body3
                   }}
                   onPress={()=>{
@@ -277,7 +285,7 @@ const FilterModal=() =>{
               return(
                 <TextButton
                   key={index}
-                  label={item?.label}
+                  value={item.label}
                   contentContainerStyle={{
                     height:45,
                     paddingHorizontal:SIZES.radius,
@@ -286,10 +294,10 @@ const FilterModal=() =>{
                     borderWidth:1,
                     borderRadius:SIZES.radius,
                     borderColor:COLORS.gray20,
-                    backgroundColor:item?.id == selectedOrdenAlfabetico ? COLORS.primary3 : null
+                    backgroundColor:item?.id == selectedOrdenAlfabetico ? COLORS.lightGreen : COLORS.transparentGray
                   }}
                   labelStyle={{
-                    color:item?.id == selectedOrdenAlfabetico ? COLORS.white : COLORS.black,
+                    color:item?.id == selectedOrdenAlfabetico ? COLORS.black : COLORS.white,
                     ...FONTS.body3
                   }}
                   onPress={()=>{

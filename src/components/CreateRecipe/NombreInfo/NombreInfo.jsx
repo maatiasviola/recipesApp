@@ -10,55 +10,46 @@ import TextButton from '../../TextButton'
 import { useContext } from 'react'
 import UserContext from '../../../Context/UserContext'
 import recetasService from '../../../Servicios/recetas'
- 
 function NombreInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
- 
   const [recetaExistenteModalVisible,setRecetaExistenteModalVisible] = useState(false)
   const {user} = useContext(UserContext)
- 
   const handleSubmit = () =>{
     // verificar si tiene una receta que ya tiene ese nombre
-    
     // si ya hay una receta con ese nombre
     //setRecetaExistenteModalVisible(true)
- 
+   
     // si no hay receta existente
     recetasService.validarNombreReceta(nuevaReceta,user.idUsuario)
       .then(response => {
-        setRecetaExistenteModalVisible(true)
+        console.log(response)
         setPagina(pagina+1)
-      }) 
+      })
       .catch(error=> {
         console.log(error)
         setRecetaExistenteModalVisible(true)
-      
       })
   }
- 
   const handleModalClickReemplazar = () =>{
     // si quiere reemplazar hago un delete de la receta anterior¿? (creo) y setPagina+1
     setPagina(pagina+1)
   }
- 
   const handleModalClickEditar = () =>{
     // si quiere editar hago un setNuevaReceta con los datos que me traigo y setPagina + 1
     setPagina(pagina+1)
   }
- 
   return (
     <>
       <ModalPopUp
-        visible={recetaExistenteModalVisible} 
+        visible={recetaExistenteModalVisible}
         setVisible={setRecetaExistenteModalVisible}  
         titulo="Nombre existente"
-      >       
- 
+      >      
         {/* Texto */}
         <Text style={styles.containerText}>
           Hemos detectado que tienes una receta con el mismo nombre. ¿Quisieras
           reemplazar o editar el nombre?
         </Text>
-        <View 
+        <View
           style={{
             display:'flex',
             width:'100%',
@@ -76,7 +67,6 @@ function NombreInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
             onPress={handleModalClickReemplazar}
             labelStyle={styles.buttonLabel}
           />
- 
           {/* Button */}
           <TextButton
             value="Editar"
@@ -86,16 +76,14 @@ function NombreInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
           />
           </View>
       </ModalPopUp>
- 
         {/* Container */}
         <>
           {/* Title */}
           <Text style={styles.containerTitle}>
             Crear Receta
           </Text>
- 
           <Text style={styles.containerText}>Ingrese el nombre de la receta</Text>
-          
+         
           {/* Nombre */}
           <SimpleInput
             containerStyle={{
@@ -105,7 +93,7 @@ function NombreInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
             value={nuevaReceta.nombre}
             onChange={(e)=>setNuevaReceta({...nuevaReceta,nombre:e.target.value})}
           />
-        
+       
           {/* Button */}
           <TextButton
             value="Siguiente paso"
@@ -125,5 +113,4 @@ function NombreInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
     </>  
   )
 }
- 
 export default NombreInfo

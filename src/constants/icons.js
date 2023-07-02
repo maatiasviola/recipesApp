@@ -65,8 +65,12 @@ const star_filled = require('../assets/icons/star_filled.png')
 const star_corner = require('../assets/icons/star_corner.png')
 const guardar = require('../assets/icons/guardar.png')
 const valorar = require('../assets/icons/valorar.png')
+const desguardar = require('../assets/icons/desguardar.png')
+const refresh = require('../assets/icons/refresh.png')
 
 export default {
+    refresh,
+    desguardar,
     guardar,
     valorar,
     star_filled,

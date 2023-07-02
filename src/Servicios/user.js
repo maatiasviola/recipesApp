@@ -8,12 +8,12 @@ const validarRegistro = async (email,alias) =>{
     return data
 }
 
-{/*
-const confirmarRegistro = async(idUsuario,nombre,contraseña,avatar)
-    console.log("Llega al servicio: ")
-    const {data} = await axios.post(`${URL}/signUp2?idUsuario={Id}&nombre={nombre}&contrasena={contrasena}`)
+
+const confirmarRegistro = async nuevoUsuario=>{
+    console.log("Nuevo Usuario:",nuevoUsuario)
+    const {data} = await axios.post(`${URL}/signUp2Foto`,nuevoUsuario)
     return data
-*/}
+}
 
 const cambiarContraseña = async(idUsuario,contrasenia)=>{
     const {data} = await axios.post(`${URL}/cambiarContrasena?idUsuario=${idUsuario}&contrasenaNueva=${contrasenia}`)
@@ -36,4 +36,4 @@ const login = async(email,password)=>{
     return data
 }
 
-export default {validarRegistro,cambiarContraseña,recibirCodigoRecupero,validarCodigo,login}
+export default {validarRegistro,cambiarContraseña,recibirCodigoRecupero,validarCodigo,login,confirmarRegistro}

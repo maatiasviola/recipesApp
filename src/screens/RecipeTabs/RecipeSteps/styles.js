@@ -4,13 +4,16 @@ import { COLORS, FONTS, SIZES } from "../../../constants"
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:COLORS.white
+    backgroundColor:COLORS.white,
+    flexGrow:1,
+    container:'relative'
   },
   header:{
     paddingHorizontal:SIZES.padding,
     marginTop:SIZES.padding
   },
   headerTitle:{
+    flex:1,
     ...FONTS.h2
   },
   headerInfo:{
@@ -50,6 +53,14 @@ const styles = StyleSheet.create({
   authorName:{
     ...FONTS.h3,
     fontSize:18
+  },
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
+  },
+  icon:{
+    fontSize:20,
   }
 })
 

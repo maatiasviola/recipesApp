@@ -2,9 +2,10 @@
 import styles from './styles'
 import { COLORS, dummyData, SIZES,FONTS, icons } from "../../constants"
 
-// Hooks
+// Hooks & Services
 import { useNavigation } from "@react-navigation/native"
 import { useRef,useState,useEffect,createRef, useCallback } from "react"
+import recetasService from '../../Servicios/recetas'
 
 // Components
 import { Text, View,Animated,TouchableOpacity, Keyboard, ImageBackground } from "react-native"
@@ -13,6 +14,8 @@ import LineDivider from "../../components/LineDivider"
 import RecipeDiscussions from "../RecipeTabs/RecipeDiscussions/RecipeDiscussions"
 import RecipeIngredients from "../RecipeTabs/RecipeIngredients/RecipeIngredients"
 import RecipeSteps from "../RecipeTabs/RecipeSteps/RecipeSteps"
+import { useContext } from 'react'
+import UserContext from '../../Context/UserContext'
 
 {/* 
     Informacion general sobre una receta (foto e iconos) 
@@ -128,13 +131,39 @@ const TabIndicator = ({measureLayout,scrollX})=>{
 const RecipeDetails = ({route})=>{
 
   const navigation = useNavigation()
-  
+  const {user} = useContext(UserContext)
+  const [recetaGuardada,setRecetaGuardada] = useState(false)  
   const [selectedRecipe,setSelectedRecipe] = useState(null)
   
   useEffect(()=>{
     const {recipe}=route.params
+    recetasService.conocerRecetaGuardadaPorUsuario(user.idUsuario,recipe.idReceta)
+      .then(response=>{
+        console.log(response)
+        setRecetaGuardada(true)
+      })
+      .catch(error=>{
+        console.log(error)
+        setRecetaGuardada(false)
+      })
+
     setSelectedRecipe(recipe)
   },[])
+
+  const handleGuardarRecetaIntentar = () =>{
+    recetasService.guardarEliminarReceta(user.idUsuario,selectedRecipe.idReceta)
+      .then(response=>{
+        console.log(response)
+        if(response=='Receta Guardada'){
+          setRecetaGuardada(true)
+        }else{
+          setRecetaGuardada(false)
+        }
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+  }
 
   // Manejar solapas
   const flatListRef=useRef()
@@ -145,6 +174,10 @@ const RecipeDetails = ({route})=>{
       offset:tabIndex*SIZES.width
     })
   }) 
+
+  if(selectedRecipe===null){
+    return <Text>Cargando...</Text>
+  }
 
   return(
     <View style={styles.container}>
@@ -165,18 +198,20 @@ const RecipeDetails = ({route})=>{
         {/* Share & Favourite */}
         <View style={{flexDirection:'row'}}>
           
-          {/* Share */}
+          {/* Valorar */}
           <IconButton
-            icon={icons.media}
+            icon={icons.valorar}
             iconStyle={{tintColor:COLORS.white}}
             containerStyle={styles.shareFavouriteContainerStyle}
+            onPress={()=>navigation.navigate("ValorarReceta",{receta:selectedRecipe})}
           />
 
           {/* Favourite */}
           <IconButton
-            icon={icons.bookmark}
+            icon={recetaGuardada ? icons.bookmarkFilled : icons.bookmark }
             iconStyle={{tintColor:COLORS.white}}
             containerStyle={styles.shareFavouriteContainerStyle}
+            onPress={handleGuardarRecetaIntentar}
           />
         </View>
       </View>
