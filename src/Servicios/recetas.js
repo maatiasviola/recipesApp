@@ -14,7 +14,9 @@ const valorarReceta = async(idUsuario,idReceta,valoracion) =>{
 }
 
 const validarNombreReceta  = async(nombreReceta,idUsuario)=>{
+  console.log("Llega al servicio validacion receta:",nombreReceta)
   const {data} = await axios.get(`${URL}/validarNombre/${nombreReceta}/${idUsuario}`)
+  console.log("Servicio devuelve:",data)
   return data
 }
 
@@ -67,6 +69,17 @@ const modificarRecetaCantidadPorciones = async(idReceta,cantidad) =>{
   return data
 }
 
+const modificarRecetaIngrediente = async(idReceta,idIngrediente,cantidad)=>{
+  const {data} = await axios.get(`${URL}/modificarCantidadAvanzado/${idReceta}/${idIngrediente}/${cantidad}`)
+  console.log("Receta modificada ingredientes:",data)
+  return data
+}
+
+const eliminarReceta = async(idReceta)=>{
+  const {data} = await axios.post(`${URL}/eliminarReceta/${idReceta}`)
+  return data
+}
+
 export default {
   obtenerTresUltimasRecetas,
   obtenerRecetasIntentar,
@@ -78,5 +91,7 @@ export default {
   guardarEliminarReceta,
   conocerRecetaGuardadaPorUsuario,
   modificarRecetaCantidadPersonas,
-  modificarRecetaCantidadPorciones
+  modificarRecetaCantidadPorciones,
+  modificarRecetaIngrediente,
+  eliminarReceta
 }

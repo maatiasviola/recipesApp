@@ -10,33 +10,70 @@ import TextButton from '../../TextButton'
 import { useContext } from 'react'
 import UserContext from '../../../Context/UserContext'
 import recetasService from '../../../Servicios/recetas'
+import AlertMessage from '../../AlertMessage'
 
-function NombreInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
+function NombreInfo({
+  pagina,
+  setPagina,
+  nuevaRecetaNombre,
+  setNuevaRecetaNombre,
+  nuevaRecetaDescripcion,
+  setNuevaRecetaDescripcion,
+  nuevaRecetaFoto,
+  setNuevaRecetaFoto,
+  nuevaRecetaPorciones,
+  setNuevaRecetaPorciones,
+  nuevaRecetaPersonas,
+  setNuevaRecetaPersonas,
+  nuevaRecetaCategoria,
+  setNuevaRecetaCategoria,
+  nuevaRecetaIngredientes,
+  setNuevaRecetaIngredientes,
+  nuevaRecetaPasos,
+  setNuevaRecetaPasos
+}) {
   const [recetaExistenteModalVisible,setRecetaExistenteModalVisible] = useState(false)
+  const [recetaExistente,setRecetaExistente] = useState(null)
+
+  // cuando la receta es creada --> con exito / fracaso
+  const [mostrarMensajeError,setMostrarMensajeError] = useState(false)
+
   const {user} = useContext(UserContext)
 
   const handleSubmit = () =>{
-    // verificar si tiene una receta que ya tiene ese nombre
-    // si ya hay una receta con ese nombre
-    //setRecetaExistenteModalVisible(true)
-    
-    // si no hay receta existente
-    recetasService.validarNombreReceta(nuevaReceta.nombre,user.idUsuario)
+    if(nuevaRecetaNombre!==""){
+      recetasService.validarNombreReceta(nuevaRecetaNombre,user.idUsuario)
       .then(response => {
+        {/* No hay receta con ese nombre */}
         setPagina(pagina+1)
       }) 
       .catch(error=> {
+        {/* Si hay receta con ese nombre */}
         console.log(error)
+        setRecetaExistente(error)
         setRecetaExistenteModalVisible(true)
-      
       })
+    }else{
+      setMostrarMensajeError(true)
+    }
   }
   const handleModalClickReemplazar = () =>{
-    // si quiere reemplazar hago un delete de la receta anterior¿? (creo) y setPagina+1
-    setPagina(pagina+1)
+    recetasService.eliminarReceta(recetaExistente.idReceta)
+      .then(()=>{
+        console.log("Reemplazada con exito!")
+        setPagina(pagina+1)
+      })
+      .catch(error=>console.log(error))
   }
   const handleModalClickEditar = () =>{
-    // si quiere editar hago un setNuevaReceta con los datos que me traigo y setPagina + 1
+    setNuevaRecetaNombre(recetaExistente.nombre)
+    setNuevaRecetaDescripcion(recetaExistente.descripcion)
+    setNuevaRecetaFoto(recetaExistente.foto)
+    setNuevaRecetaPersonas(recetaExistente.cantidadPersonas)
+    setNuevaRecetaPorciones(recetaExistente.porciones)
+    setNuevaRecetaIngredientes(recetaExistente.utilizados)
+    setNuevaRecetaPasos(recetaExistente.pasos)
+    setNuevaRecetaCategoria(recetaExistente.tipo)
     setPagina(pagina+1)
   }
   return (
@@ -92,11 +129,17 @@ function NombreInfo({pagina,setPagina,nuevaReceta,setNuevaReceta}) {
               borderRadius:SIZES.radius
             }}
             placeholder='Nombre de la receta'
-            value={nuevaReceta.nombre}
-            onChange={(e)=>setNuevaReceta({...nuevaReceta,nombre:e.target.value})}
+            value={nuevaRecetaNombre}
+            onChange={(e)=>setNuevaRecetaNombre(e.target.value)}
           />
+          {mostrarMensajeError &&
+            <AlertMessage
+              mensaje="Nombre de receta incompleto"
+              tipoMensaje="Error"
+            />
+          }
        
-          {/* Button */}
+          {/* Boton */}
           <TextButton
             value="Siguiente paso"
             containerStyle={{

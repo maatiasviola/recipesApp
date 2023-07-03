@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
     ...FONTS.h1
   },
   containerText:{
-    marginTop:20,
-    marginBottom:8,
+    marginVertical:10,
     textAlign:'center'
   },
   buttonContainer:{
-    height:55,
+    height:36,
+    width:120,
     borderRadius:SIZES.radius,
     backgroundColor:COLORS.primary,
     marginTop:20

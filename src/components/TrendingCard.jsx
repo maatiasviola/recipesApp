@@ -1,13 +1,13 @@
 import { TouchableOpacity,StyleSheet, Image,View,Text } from "react-native"
-import { COLORS, FONTS, SIZES } from "../constants"
+import { COLORS, FONTS, SIZES, images } from "../constants"
 import RecipeCardInfo from "./RecipeCardInfo"
 
 const TrendingCard = ({containerStyle,recipeItem,onPress})=>{
-  console.log(recipeItem)
+  //console.log(recipeItem)
   return(
     <TouchableOpacity style={[styles.container, {...containerStyle}]} onPress={onPress}>
       <Image
-        source={recipeItem.foto.urlFoto}
+        source={recipeItem.foto.urlFoto || images.notFoundImage}
         resizeMode='cover'
         style={styles.image}
       />

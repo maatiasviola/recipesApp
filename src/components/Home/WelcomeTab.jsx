@@ -1,14 +1,13 @@
 import { Text, Image, View,StyleSheet,TouchableOpacity } from "react-native"
 import { COLORS, FONTS, SIZES, images } from "../../constants"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import UserContext from "../../Context/UserContext"
-
 // Cabecera de la pagina "Home"
 // "Bienvenida" al usuario
 
 const WelcomeTab = () =>{
   const {user} = useContext(UserContext)
-
+  
   return(
     <View style={styles.welcome}>
       <View style={{flex:1}}>

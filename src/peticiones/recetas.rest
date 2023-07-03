@@ -31,3 +31,7 @@ GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/busc
 
 ################3
 GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/getValoracionUsuarioReceta/17/3
+
+###################
+// Modificar cantidad recetas
+GET http://recetasfinal-master-production.up.railway.app/Recetas/Controller/modificarCantidadAvanzado/1/2/6

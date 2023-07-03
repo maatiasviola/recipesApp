@@ -32,6 +32,7 @@ const galeria = require('../assets/images/galeria.png')
 const camara = require('../assets/images/camara.png')
 const defaultUser = require('../assets/images/defaultuser.png')
 const defaultImage = require('../assets/images/defaultImage.png')
+const notFoundImage = require('../assets/icons/image-not-found.png')
 
 // Filtros
 const incluyeIngredientes = require('../assets/icons/incluyeIngredientes.png')
@@ -39,6 +40,7 @@ const excluyeIngredientes = require('../assets/icons/excluyeIngredientes.png')
 const autor = require('../assets/icons/autor.png')
 
 export default {
+    notFoundImage,
     incluyeIngredientes,
     excluyeIngredientes,
     autor,

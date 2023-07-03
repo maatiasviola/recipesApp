@@ -12,13 +12,18 @@ const styles = StyleSheet.create({
   },
   headerTitle:{
     flex:1,
-    ...FONTS.h2
+    ...FONTS.h3
   },
   headerInfo:{
     display:'flex',
     justifyContent:'space-between',
     marginVertical:2,
     gap:2
+  },
+  headerOption:{
+    display:'flex',
+    alignItems:'center',
+    flexDirection:'row'
   },
   botonesMatematicos:{
     flexDirection:'row',
@@ -68,6 +73,12 @@ const styles = StyleSheet.create({
   },
   icon:{
     fontSize:20,
+  },
+  input:{
+    backgroundColor: COLORS.gray20,  // Color de fondo
+    borderRadius: 10,             // Radio de borde
+    textAlign: 'center',
+    width:40
   }
 })
 

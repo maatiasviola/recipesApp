@@ -1,6 +1,6 @@
 // CSS & Constants
 import styles from './styles'
-import { COLORS, dummyData, FONTS, icons, images, SIZES } from "../../constants"
+import { COLORS, FONTS, icons, images, SIZES } from "../../constants"
 
 // Hooks & Services
 import { useState } from 'react'
@@ -18,7 +18,16 @@ import { useEffect } from 'react'
 {/* Pagina resultados de busqueda */}
 
 const RecipesListing = ({navigation,route})=>{
+  // Resultados
   const [resultados,setResultados] = useState([])
+  
+  // Filtros
+  const [selectedMasAntigua,setSelectedMasAntigua] = useState("")
+  const [selectedOrdenAlfabetico,setSelectedOrdenAlfabetico] = useState("")
+
+  const [ingredientesIncluidos,setIngredientesIncluidos] = useState([])
+  const [ingredientesExcluidos,setIngredientesExcluidos] = useState([])
+  const [filtroAutor,setFiltroAutor] = useState(null)
   
   const {nombre,categoria} = route.params
 
@@ -36,6 +45,36 @@ const RecipesListing = ({navigation,route})=>{
     }
   },[nombre,categoria])
 
+  const filtrarResultados = (antiguedad, ordenAlfabetico) => {
+    let resultadosFiltrados = [...resultados];
+  
+    // Aplica los filtros según las selecciones del usuario
+    if (antiguedad === "Mas reciente") {
+      // Implementa la lógica de comparación para ordenar los resultados según la fecha menos antigua
+      resultadosFiltrados = resultadosFiltrados.reverse();
+    } else if (antiguedad === "Mas antigua") {
+      // Implementa la lógica de comparación para ordenar los resultados según la fecha más antigua
+      resultadosFiltrados = resultadosFiltrados.reverse();
+    }
+  
+    if (ordenAlfabetico === "Por usuario") {
+      // Implementa la lógica de comparación para ordenar los resultados por usuario
+      resultadosFiltrados.sort((a, b) => a.nombreUsuario.localeCompare(b.nombreUsuario));
+    } else if (ordenAlfabetico === "Por receta") {
+      // Implementa la lógica de comparación para ordenar los resultados por receta
+      resultadosFiltrados.sort((a, b) => a.descripcion.localeCompare(b.descripcion));
+    }
+  
+    // Devuelve los resultados filtrados
+    return resultadosFiltrados;
+  };
+
+  useEffect(() => {
+    // Llama a la función de búsqueda cuando se actualicen los filtros
+    const nuevosResultados = filtrarResultados(selectedMasAntigua, selectedOrdenAlfabetico);
+    setResultados(nuevosResultados);
+  }, [selectedMasAntigua, selectedOrdenAlfabetico]);
+
   return(
     <>
       <ModalPopUp
@@ -43,7 +82,18 @@ const RecipesListing = ({navigation,route})=>{
         setVisible={setFiltrosVisible}
         titulo="Filtros"  
       >
-        <FilterModal/>
+        <FilterModal
+          selectedMasAntigua={selectedMasAntigua}
+          setSelectedMasAntigua={setSelectedMasAntigua}
+          selectedOrdenAlfabetico={selectedOrdenAlfabetico}
+          setSelectedOrdenAlfabetico={setSelectedOrdenAlfabetico}
+          ingredientesIncluidos={ingredientesIncluidos}
+          setIngredientesIncluidos={setIngredientesIncluidos}
+          ingredientesExcluidos={ingredientesExcluidos}
+          setIngredientesExcluidos ={setIngredientesExcluidos}
+          filtroAutor={filtroAutor}
+          setFiltroAutor={setFiltroAutor}
+        />
       </ModalPopUp>
       <View style={styles.container}>
         {/* Filter Modal */}

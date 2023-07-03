@@ -11,6 +11,8 @@ import { StyleSheet } from 'react-native'
 import TextButton from './TextButton'
 import { useEffect } from 'react'
 import ingredientesService from '../Servicios/ingredientes'
+import userService from '../Servicios/user'
+import SelectDropdown from 'react-native-select-dropdown'
 
 const ClassTypeOption = ({containerStyle,classType, isSelected,onPress})=>{
   return(
@@ -51,19 +53,25 @@ const ClassTypeOption = ({containerStyle,classType, isSelected,onPress})=>{
   )
 }
 
-const FilterModal=() =>{
-  
-  const [selectedFiltroEspecial,setSelectedFiltroEspecial] = useState("")
-  const [selectedMasAntigua,setSelectedMasAntigua] = useState("")
-  const [selectedOrdenAlfabetico,setSelectedOrdenAlfabetico] = useState("")
-
-  const [ingredientesIncluidos,setIngredientesIncluidos] = useState([])
-  const [ingredientesExcluidos,setIngredientesExcluidos] = useState([])
-
+const FilterModal=({
+  selectedMasAntigua,
+  setSelectedMasAntigua,
+  selectedOrdenAlfabetico,
+  setSelectedOrdenAlfabetico,
+  ingredientesIncluidos,
+  setIngredientesIncluidos,
+  ingredientesExcluidos,
+  setIngredientesExcluidos, 
+  filtroAutor,
+  setFiltroAutor,
+}) =>{
+  console.log(selectedOrdenAlfabetico)
   // modales
   const [modalIncluirIngredientesVisible,setModalIncluirIngredientesVisible] = useState(false)
   const [modalExcluirIngredientesVisible,setModalExcluirIngredientesVisible] = useState(false)
   const [modalSeleccionarUsuario,setModalSeleccionarUsuario] = useState(false)
+
+  const [selectedFiltroEspecial,setSelectedFiltroEspecial] = useState("")
 
   // servicios
   const [ingredientes,setIngredientes] = useState([])
@@ -72,6 +80,13 @@ const FilterModal=() =>{
   useEffect(()=>{
     ingredientesService.obtenerIngredientes()
       .then(response=>setIngredientes(response))
+      .catch(error=>console.log(error))
+    
+    userService.obtenerUsuarios()
+      .then(response=>{
+        
+        setUsuarios(response)
+      })
       .catch(error=>console.log(error))
   },[])
 
@@ -125,7 +140,7 @@ const FilterModal=() =>{
         />     
       </ModalPopUp>
 
-      {/* Modal Incluir Ingredientes */}
+      {/* Modal Excluir Ingredientes */}
       <ModalPopUp 
         visible={modalExcluirIngredientesVisible} 
         setVisible={setModalExcluirIngredientesVisible}
@@ -161,12 +176,53 @@ const FilterModal=() =>{
         />     
       </ModalPopUp>
 
+      {/* Modal Seleccionar Autor */}
+      <ModalPopUp 
+        visible={modalSeleccionarUsuario} 
+        setVisible={setModalSeleccionarUsuario}
+        titulo="¿Que chef estas buscando?"  
+      >
+        {/* Probando, debe ir dentro de un modal */}
+        <View
+          style={{
+            flex:1,paddingHorizontal:20,paddingTop:20
+          }}
+        >
+          <SelectDropdown
+            data={usuarios}
+            onSelect={(selectedItem, index) => {
+              setUsuarios(selectedItem)
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              // text represented after item is selected
+              // if data array is an array of objects then return selectedItem.property to render after item is selected
+              return selectedItem
+            }}
+            rowTextForSelection={(item, index) => {
+              // text represented for each item in dropdown
+              // if data array is an array of objects then return item.property to represent item in dropdown
+              return item
+            }}
+          />
+        </View>
+
+        {/* Button */}
+        <TextButton
+          value="Aplicar"
+          containerStyle={styles.aplicarButton}
+          onPress={()=>setModalExcluirIngredientesVisible(false)}
+          labelStyle={{
+            ...FONTS.h3,
+            color:COLORS.white
+          }}
+        />     
+      </ModalPopUp>
       {/* Filtros */}
 
       {/* Content */}
       <ScrollView
         contentContainerStyle={{
-          paddingHorizontal:SIZES.padding,
+          paddingHorizontal:2,
           display:'flex',
           justifyContent:'space-between',
           gap:5
@@ -228,7 +284,11 @@ const FilterModal=() =>{
             style={{
               flex:1,
               flexDirection:'row',
-              flexWrap:'wrap'
+              flexWrap:'wrap',
+              display:'flex',
+              justifyContent:'space-between',
+              gap:5,
+              width:'100%'
             }}
           >
             {filtros.fechaCarga.map((item,index)=>{
@@ -236,22 +296,25 @@ const FilterModal=() =>{
                 <TextButton
                   key={index}
                   value={item.label}
-                  contentContainerStyle={{
+                  containerStyle={{
                     height:45,
+                    flex:1,
                     paddingHorizontal:SIZES.radius,
                     marginLeft:index % 3 == 0 ? 0 : SIZES.radius,
                     marginTop:SIZES.radius,
                     borderWidth:1,
+                    borderStyle:'solid',
                     borderRadius:SIZES.radius,
-                    borderColor:COLORS.gray20,
-                    backgroundColor:item?.id == selectedMasAntigua ? COLORS.lightGreen : COLORS.transparentGray
+                    borderColor:COLORS.black,
+                    backgroundColor:item?.label == selectedMasAntigua ? COLORS.black : COLORS.white
                   }}
                   labelStyle={{
-                    color:item?.id == selectedMasAntigua ? COLORS.black : COLORS.white,
+                    color:item?.label == selectedMasAntigua ? COLORS.white : COLORS.black,
                     ...FONTS.body3
                   }}
                   onPress={()=>{
-                    setSelectedMasAntigua(item.id)
+                    //console.log("Filtro antiguedad:",item)
+                    setSelectedMasAntigua(item.label)
                   }}
                 
                 />
@@ -277,31 +340,37 @@ const FilterModal=() =>{
             style={{
               flex:1,
               flexDirection:'row',
-              flexWrap:'wrap'
+              flexWrap:'wrap',
+              display:'flex',
+              justifyContent:'space-between',
+              gap:5,
+              width:'100%'
             }}
           >
             {filtros.ordenAlfabetico.map((item,index)=>{
-              console.log(item)
               return(
                 <TextButton
                   key={index}
                   value={item.label}
-                  contentContainerStyle={{
+                  containerStyle={{
                     height:45,
+                    flex:1,
                     paddingHorizontal:SIZES.radius,
                     marginLeft:index % 3 == 0 ? 0 : SIZES.radius,
                     marginTop:SIZES.radius,
                     borderWidth:1,
+                    borderStyle:'solid',
                     borderRadius:SIZES.radius,
-                    borderColor:COLORS.gray20,
-                    backgroundColor:item?.id == selectedOrdenAlfabetico ? COLORS.lightGreen : COLORS.transparentGray
+                    borderColor:COLORS.black,
+                    backgroundColor:item?.label == selectedOrdenAlfabetico ? COLORS.black : COLORS.white
                   }}
                   labelStyle={{
-                    color:item?.id == selectedOrdenAlfabetico ? COLORS.black : COLORS.white,
+                    color:item?.label == selectedOrdenAlfabetico ? COLORS.white : COLORS.black,
                     ...FONTS.body3
                   }}
                   onPress={()=>{
-                    setSelectedOrdenAlfabetico(item.id)
+                    //console.log("Filtro alfabetico:",item)
+                    setSelectedOrdenAlfabetico(item.label)
                   }}
                 />
               )

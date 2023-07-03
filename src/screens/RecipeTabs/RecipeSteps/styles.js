@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
   },
   headerInfo:{
     flexDirection:'row',
-    marginTop:SIZES.base
+    marginTop:SIZES.base,
+    alignItems:'center'
   },
   headerInfoIconContainer:{
     flexDirection:'row',

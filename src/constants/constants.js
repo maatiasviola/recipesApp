@@ -21,7 +21,7 @@ const filtrosEspeciales = [
 const fechaCarga = [
   {
       id: 0,
-      label: "Menos Antigua"
+      label: "Mas reciente"
   },
   {
       id: 1,

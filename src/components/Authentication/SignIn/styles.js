@@ -1,9 +1,5 @@
 import { StyleSheet } from "react-native"
 import { COLORS, SIZES, FONTS } from "../../../constants"
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 const styles = StyleSheet.create({
   bigContainer:{
     flex:1,
@@ -120,9 +116,4 @@ const styles = StyleSheet.create({
     color: COLORS.gray30
   }
 })
-<<<<<<< Updated upstream
 export default styles;
-=======
-
-export default styles;
->>>>>>> Stashed changes

@@ -7,4 +7,10 @@ const obtenerIngredientes = async() =>{
   return data
 }
 
-export default {obtenerIngredientes}
+const obtenerUnidades = async() =>{
+  const {data} = await axios.get(`${URL}/getUnidades`)
+  console.log("Unidades servicio:",data)
+  return data
+}
+
+export default {obtenerIngredientes,obtenerUnidades}

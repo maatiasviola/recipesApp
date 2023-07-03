@@ -200,7 +200,7 @@ const RecipeDetails = ({route})=>{
           
           {/* Valorar */}
           <IconButton
-            icon={icons.valorar}
+            icon={icons.star_filled}
             iconStyle={{tintColor:COLORS.white}}
             containerStyle={styles.shareFavouriteContainerStyle}
             onPress={()=>navigation.navigate("ValorarReceta",{receta:selectedRecipe})}

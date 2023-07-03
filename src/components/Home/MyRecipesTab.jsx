@@ -1,7 +1,23 @@
 import { Image, View,StyleSheet,Text, TouchableOpacity } from "react-native"
 import { COLORS,SIZES,FONTS } from "../../constants"
-
+import recetasService from "../../Servicios/recetas"
+import { useState } from "react"
+import { useEffect } from "react"
+import { useNavigation } from "@react-navigation/native"
+import { useContext } from "react"
+import UserContext from "../../Context/UserContext"
 const MyRecipesTab = ()=>{
+
+  const navigation = useNavigation()
+
+  const [cantRecetas,setCantRecetas] = useState(0)
+  const {user} = useContext(UserContext)
+
+  useEffect(()=>{
+    recetasService.obtenerRecetasIntentar(user.idUsuario)
+      .then(response=>setCantRecetas(response.lenght))
+      .catch(error=>console.log(error))
+  },[])
   return(
     <View style={styles.container}>
       
@@ -18,13 +34,13 @@ const MyRecipesTab = ()=>{
         
         {/* N° Recipes */}
         <Text style={styles.mainText}>
-          Tienes 12 recetas que no has intentado
+          Tienes {cantRecetas} recetas que no has intentado
         </Text>
         
         {/* See Recipes */}
         <TouchableOpacity 
           style={{marginTop:10}} 
-          onPress={()=>navigation.navigate("RecipeListing")}
+          onPress={()=>navigation.navigate("RecetasIntentar")}
         >
           <Text style={styles.linkText}>
             Ver recetas

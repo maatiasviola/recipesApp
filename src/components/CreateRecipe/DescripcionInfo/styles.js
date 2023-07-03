@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     color:COLORS.white
   },
   profileImageContainer:{
-    marginVertical:SIZES.padding,
+    marginVertical:SIZES.base,
     display:'flex',
     alignItems:'center',
     justifyContent:'center',
@@ -38,6 +38,13 @@ const styles = StyleSheet.create({
     borderColor:COLORS.white,
     borderWidth:1
   },
+  botonesContainer:{
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    gap:10
+  }
 })
 
 export default styles

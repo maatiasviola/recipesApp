@@ -38,7 +38,7 @@ const RecipeStepCard = ({step,setSelectedStep,setStepModalVisible})=>{
             ...FONTS.h3
           }}
         > 
-          {step?.nroPaso}. {step?.texto}
+          Paso {step?.nroPaso}
         </Text>
       </View>
 

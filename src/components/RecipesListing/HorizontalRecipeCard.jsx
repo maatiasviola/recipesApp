@@ -1,5 +1,5 @@
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { COLORS, FONTS, icons, SIZES } from "../../constants"
+import { COLORS, FONTS, icons, images, SIZES } from "../../constants"
 
 const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
   return(
@@ -12,7 +12,7 @@ const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
     >
       {/* Miniatura */}
       <ImageBackground
-        source={recipe?.foto.urlFoto}
+        source={recipe?.foto.urlFoto || images.notFoundImage}
         resizeMode="cover"
         style={styles.image}
         imageStyle={{
@@ -58,39 +58,19 @@ const HorizontalRecipeCard = ({containerStyle,recipe,onPress})=>{
             marginTop:SIZES.base
           }}
         >
+          <Image 
+            source={recipe.fotoUsuario || images.defaultUser} 
+            style={{width:24,height:24}}
+          />
           <Text
             style={{
-              ...FONTS.body4,
-              color:COLORS.gray
+              ...FONTS.body3,
+              color:COLORS.gray,
+              marginLeft:5
             }}
           >
-            Por {recipe?.nombreUsuario}
+            {recipe?.nombreUsuario}
           </Text>
-          <View
-            style={{
-              marginLeft:SIZES.base,
-              flexDirection:'row',
-              alignItems:'center'
-            }}
-          >
-            <Image
-              source={icons.time}
-              style={{
-                width:15,
-                height:15,
-                tintColor:COLORS.gray30
-              }}
-            />
-            <Text
-              style={{
-                ...FONTS.body4,
-                color:COLORS.gray30,
-                marginLeft:SIZES.base
-              }}
-            >
-              {recipe?.descripcion}
-            </Text>
-          </View>
         </View>
 
         {/* Rating */}

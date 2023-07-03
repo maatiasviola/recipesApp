@@ -1,0 +1,87 @@
+import { StyleSheet } from 'react-native'
+import { COLORS, FONTS } from '../../../constants'
+
+
+const styles = StyleSheet.create({
+  container:{
+    display:'flex',
+    gap:10,
+    paddingHorizontal:5,
+    paddingVertical:10,
+    flex:1
+  },
+  containerTitle:{
+    ...FONTS.h1
+  },
+  agregarPasosContainer:{
+    padding:10,
+    backgroundColor:COLORS.gray20,
+    width:'100%',
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    marginTop:10,
+    borderRadius:8
+  },
+  agregarPasosText:{
+    flex:1,
+    color:COLORS.black,
+    fontSize:16
+  },
+  agregarPasosIcon:{
+    width:24,
+    height:24,
+    tintColor:COLORS.black
+  },
+  inputLabel:{
+    marginTop:20,
+    marginBottom:8,
+    textAlign:'center'
+  },
+  botonesContainer:{
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-around',
+    width:'100%',
+    gap:10
+  },
+  modalMultimediaContainer:{
+    display:'flex',
+    marginVertical:10,
+    gap:5
+  },
+  modalImagenContainer:{
+    display:'flex',
+    alignItems:'center',
+    flexDirection:'row'
+  },
+  modalCloseContainer:{
+    width:24,
+    height:24,
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  modalCloseIcon:{
+    width:'100%',
+    height:'100%'
+  },
+  modalImageText:{
+    marginLeft:5,
+    flex:1
+  },
+  inputContainer:{
+    display:'flex'
+  },
+  botonesContainer:{
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    gap:10,
+    bottom:10
+  }
+})
+
+export default styles

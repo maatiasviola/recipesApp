@@ -53,6 +53,19 @@ const chequearRecetaExiste = async (idReceta) => {
   return false; // Devuelve false si ocurre un error o no se encuentra el arreglo de recetas
 };
 
+const obtenerCantidadRecetas = async () => {
+  try {
+    const recetasGuardadas = await AsyncStorage.getItem('recetasModificadas');
+    if (recetasGuardadas) {
+      const recipes = JSON.parse(recetasGuardadas);
+      return recipes.length; // Devuelve la longitud del arreglo recipes si se encontró
+    }
+  } catch (error) {
+    console.log('Error al obtener las recetas del AsyncStorage:', error);
+  }
+  return 0; // Devuelve 0 si ocurre un error o no se encuentra el arreglo de recetas
+};
+
 const eliminarReceta = async (idReceta) => {
   try {
     const recetasGuardadas = await AsyncStorage.getItem('recetasModificadas');
@@ -73,5 +86,6 @@ export default {
   guardarRecetaDispositivo,
   recuperarRecetasDispositivo,
   chequearRecetaExiste,
-  eliminarReceta
+  eliminarReceta,
+  obtenerCantidadRecetas
 }

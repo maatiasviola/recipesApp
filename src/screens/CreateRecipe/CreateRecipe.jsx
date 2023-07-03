@@ -12,41 +12,55 @@ function CreacionReceta() {
   const [pagina,setPagina]=useState(0)
 
   // Datos nueva receta
-  const [nuevaReceta,setNuevaReceta] = useState({
-    nombre:"",
-    descripcion:"",
-    foto:"",
-    porciones:"",
-    cantidadPersonas:"",
-    categoria:"",
-    ingredientes:[],
-    pasos:[]
-  })
+  const [nuevaRecetaNombre,setNuevaRecetaNombre] = useState("")
+  const [nuevaRecetaDescripcion,setNuevaRecetaDescripcion] = useState("")
+  const [nuevaRecetaFoto,setNuevaRecetaFoto] = useState(null)
+  const [nuevaRecetaPorciones,setNuevaRecetaPorciones]=useState("")
+  const [nuevaRecetaPersonas,setNuevaRecetaPersonas]=useState("")
+  const [nuevaRecetaCategoria,setNuevaRecetaCategoria]=useState("")
+  const [nuevaRecetaIngredientes,setNuevaRecetaIngredientes]=useState([])
+  const [nuevaRecetaPasos,setNuevaRecetaPasos]=useState([])
   
   const componentList=[
     <NombreInfo 
       pagina={pagina} setPagina={setPagina} 
-      nuevaReceta={nuevaReceta} setNuevaReceta={setNuevaReceta}
+      nuevaRecetaNombre={nuevaRecetaNombre} setNuevaRecetaNombre={setNuevaRecetaNombre}
+      nuevaRecetaDescripcion={nuevaRecetaDescripcion} setNuevaRecetaDescripcion={setNuevaRecetaDescripcion}
+      nuevaRecetaFoto={nuevaRecetaFoto} setNuevaRecetaFoto={setNuevaRecetaFoto}
+      nuevaRecetaPorciones={nuevaRecetaPorciones} setNuevaRecetaPorciones={setNuevaRecetaPorciones}
+      nuevaRecetaPersonas={nuevaRecetaPersonas} setNuevaRecetaPersonas={setNuevaRecetaPersonas}
+      nuevaRecetaCategoria={nuevaRecetaCategoria} setNuevaRecetaCategoria={setNuevaRecetaCategoria}
+      nuevaRecetaIngredientes={nuevaRecetaIngredientes} setNuevaRecetaIngredientes={setNuevaRecetaIngredientes}
+      nuevaRecetaPasos={nuevaRecetaPasos} setNuevaRecetaPasos={setNuevaRecetaPasos}
     />,
     <DescripcionInfo
       pagina={pagina} setPagina={setPagina}
-      nuevaReceta={nuevaReceta} setNuevaReceta={setNuevaReceta}
+      nuevaRecetaDescripcion={nuevaRecetaDescripcion} setNuevaRecetaDescripcion={setNuevaRecetaDescripcion}
+      nuevaRecetaFoto={nuevaRecetaFoto} setNuevaRecetaFoto={setNuevaRecetaFoto}
+      nuevaRecetaPorciones={nuevaRecetaPorciones} setNuevaRecetaPorciones={setNuevaRecetaPorciones}
+      nuevaRecetaPersonas={nuevaRecetaPersonas} setNuevaRecetaPersonas={setNuevaRecetaPersonas}
+      nuevaRecetaCategoria={nuevaRecetaCategoria} setNuevaRecetaCategoria={setNuevaRecetaCategoria}
     />,
     <IngredientesInfo 
       pagina={pagina} setPagina={setPagina} 
-      nuevaReceta={nuevaReceta} setNuevaReceta={setNuevaReceta}
+      nuevaRecetaIngredientes={nuevaRecetaIngredientes} setNuevaRecetaIngredientes={setNuevaRecetaIngredientes}
     />,
     <PasosInfo
       pagina={pagina} setPagina={setPagina} 
-      nuevaReceta={nuevaReceta} setNuevaReceta={setNuevaReceta} 
+      nuevaRecetaNombre={nuevaRecetaNombre} setNuevaRecetaNombre={setNuevaRecetaNombre}
+      nuevaRecetaDescripcion={nuevaRecetaDescripcion} setNuevaRecetaDescripcion={setNuevaRecetaDescripcion}
+      nuevaRecetaFoto={nuevaRecetaFoto} setNuevaRecetaFoto={setNuevaRecetaFoto}
+      nuevaRecetaPorciones={nuevaRecetaPorciones} setNuevaRecetaPorciones={setNuevaRecetaPorciones}
+      nuevaRecetaPersonas={nuevaRecetaPersonas} setNuevaRecetaPersonas={setNuevaRecetaPersonas}
+      nuevaRecetaCategoria={nuevaRecetaCategoria} setNuevaRecetaCategoria={setNuevaRecetaCategoria}
+      nuevaRecetaIngredientes={nuevaRecetaIngredientes} setNuevaRecetaIngredientes={setNuevaRecetaIngredientes}
+      nuevaRecetaPasos={nuevaRecetaPasos} setNuevaRecetaPasos={setNuevaRecetaPasos}
     />
   ]
 
   return (
       <ScrollView style={styles.container}>
-        <View>
           {componentList[pagina]}
-        </View>
       </ScrollView>
   )
 }

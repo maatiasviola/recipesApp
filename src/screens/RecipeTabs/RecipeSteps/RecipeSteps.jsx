@@ -104,11 +104,11 @@ const RecipeSteps = ({selectedRecipe}) =>{
             
             <View style={styles.headerInfoIconContainer}>
               <Image 
-                source={images.incluyeIngredientes} 
+                source={icons.star_filled} 
                 style={styles.headerInfoIcon}
               />
               <Text style={styles.headerInfoText}>
-                {selectedRecipe?.tipo.descripcion}
+                {selectedRecipe?.valoracionGeneral}
               </Text>
             </View>
           </View>

@@ -36,4 +36,18 @@ const login = async(email,password)=>{
     return data
 }
 
-export default {validarRegistro,cambiarContraseña,recibirCodigoRecupero,validarCodigo,login,confirmarRegistro}
+const obtenerUsuarios = async() =>{
+    const {data} = await axios.get(`${URL}/getAllUsuarios`)
+    console.log("Usuarios devueltos por servicio: ",data)
+    return data
+}
+
+export default {
+    validarRegistro,
+    cambiarContraseña,
+    recibirCodigoRecupero,
+    validarCodigo,
+    login,
+    confirmarRegistro,
+    obtenerUsuarios
+}
